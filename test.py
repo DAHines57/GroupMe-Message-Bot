@@ -18,10 +18,14 @@ def post_Text(user_Text):
 def parse_messages():
     print("FrickleFrackle")
     message = request.get_json()
+    print(message)
     if message['sender_type'] != "user":
+        print("not a user")
         return 'OK'
     if "bupd" in message['text'].lower():
+        print("JLaw test")
         post_Text("JOHNNY LAW")
     if "Hi" in message['text']:
+        print("hi xyz test")
         post_Text("Hi " + message['name'].split(" ")[0] + "!")
     return 'OK'
