@@ -1,2 +1,2 @@
-# miniature-octo-happiness
-GroupMe Bot Shenanigans 
+# GroupMe Message Bot
+GroupMe bot that parses and responds to messages in a group
