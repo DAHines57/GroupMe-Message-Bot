@@ -22,6 +22,6 @@ def parse_messages():
         return 'OK'
     if "bupd" in message['text'].lower():
         post_Text("JOHNNY LAW")
-    if "Hi" in message['text'].lower():
+    if "Hi" in message['text']:
         post_Text("Hi " + message['name'].split(" ")[0] + "!")
     return 'OK'
