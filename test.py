@@ -14,7 +14,7 @@ def post_Text(user_Text, bot_id):
     requests.post('https://api.groupme.com/v3/bots/post', params = {'bot_id' : bot_id, 'text' : user_Text})
 
 @app.route('/callback/<bot_id>', methods=['POST'])
-def parse_messages():
+def parse_messages(bot_id):
     message = request.get_json()
     if message['sender_type'] != "user":
         return 'OK'
