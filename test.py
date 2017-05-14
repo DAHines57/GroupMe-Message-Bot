@@ -19,9 +19,11 @@ def parse_messages():
     if message['sender_type'] != "user":
         return 'OK'
 
-    # Johnny Law
-    if "bupd" in message['text'].lower():
-        post_Text("JOHNNY LAW", bot_id)
+    # BUPD Things
+    if request.args.get('bupd', 'off') == 'on':
+        # Johnny Law
+        if "bupd" in message['text'].lower():
+            post_Text("JOHNNY LAW", bot_id)
 
     # Say hello to anyone that says "Hi"
     if "Hi" in message['text']:
