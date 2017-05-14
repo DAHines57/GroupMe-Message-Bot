@@ -19,8 +19,20 @@ def parse_messages():
     message = request.get_json()
     if message['sender_type'] != "user":
         return 'OK'
+
+    # Johnny Law
     if "bupd" in message['text'].lower():
         post_Text("JOHNNY LAW")
+
+    # Say hello to anyone that says "Hi"
     if "Hi" in message['text']:
         post_Text("Hi " + message['name'].split(" ")[0] + "!")
+
+    """
+    # Get annoyed at long texts
+    if len(message['text']) >= 300:
+        post_Text("Cool story bro.")
+        """
+
+
     return 'OK'
