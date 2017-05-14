@@ -16,6 +16,7 @@ def post_Text(user_Text):
 
 @app.route('/callback', methods=['POST'])
 def parse_messages():
+    print("FrickleFrackle")
     message = request.get_json()
     if message['sender_type'] != "user":
         return 'OK'
