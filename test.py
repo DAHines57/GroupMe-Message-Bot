@@ -9,12 +9,11 @@ app = Flask(__name__)
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
-bot_id = os.environ.get("BOT_ID")
 
-def post_Text(user_Text):
+def post_Text(user_Text, bot_id):
     requests.post('https://api.groupme.com/v3/bots/post', params = {'bot_id' : bot_id, 'text' : user_Text})
 
-@app.route('/callback', methods=['POST'])
+@app.route('/callback/<bot_id>', methods=['POST'])
 def parse_messages():
     message = request.get_json()
     if message['sender_type'] != "user":
@@ -22,11 +21,11 @@ def parse_messages():
 
     # Johnny Law
     if "bupd" in message['text'].lower():
-        post_Text("JOHNNY LAW")
+        post_Text("JOHNNY LAW", bot_id)
 
     # Say hello to anyone that says "Hi"
     if "Hi" in message['text']:
-        post_Text("Hi " + message['name'].split(" ")[0] + "!")
+        post_Text("Hi " + message['name'].split(" ")[0] + "!", bot_id)
 
     """
     # Get annoyed at long texts

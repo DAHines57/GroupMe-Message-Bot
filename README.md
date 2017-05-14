@@ -1,2 +1,2 @@
 # GroupMe Message Bot
-GroupMe bot that parses and responds to messages in a group
+GroupMe bot that I made for fun for some friends
