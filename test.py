@@ -29,7 +29,6 @@ def parse_messages(bot_id):
 
         # Say hello to anyone that says "Hi"
         if "Hi" in message['text']:
-            x=5/0
             post_text("Hi " + message['name'].split(" ")[0] + "!", bot_id)
 
         """
