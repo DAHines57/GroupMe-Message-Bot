@@ -1,6 +1,7 @@
 import os
 import requests
 import werkzeug
+import giphypop
 from os.path import join, dirname
 from dotenv import load_dotenv
 from flask import Flask
@@ -11,6 +12,7 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
 bupd_responses = {'fuzz': "Oh shit, it's the fuzz!", 'jlaw': 'Johnny Law!'}
+gif = giphypop.Giphy()
 
 def post_text(user_text, bot_id):
     requests.post('https://api.groupme.com/v3/bots/post', params = {'bot_id' : bot_id, 'text' : user_text})
@@ -30,6 +32,10 @@ def parse_messages(bot_id):
         # Say hello to anyone that says "Hi"
         if "Hi" in message['text']:
             post_text("Hi " + message['name'].split(" ")[0] + "!", bot_id)
+
+        if "/gif" in message['text']:
+            gif_search = message['text'][5:]
+            post_text(gif.translate(gif_search), bot_id)
 
         """
         # Get annoyed at long texts

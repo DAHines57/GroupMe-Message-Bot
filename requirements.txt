@@ -8,3 +8,4 @@ requests==2.14.2
 Werkzeug==0.12.1
 gevent
 gunicorn
+giphypop
