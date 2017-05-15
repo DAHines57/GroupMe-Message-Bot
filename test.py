@@ -11,7 +11,7 @@ app = Flask(__name__)
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
-bupd_responses = {'jlaw': 'Johnny Law!'}
+bupd_responses = {'jlaw': 'JOHNNY LAW'}
 gif = giphypop.Giphy()
 
 def post_text(user_text, bot_id):
