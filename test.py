@@ -9,9 +9,10 @@ app = Flask(__name__)
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
+bupd_responses = {'fuzz': "Oh shit, it's the fuzz!", 'jlaw': 'Johnny Law!'}
 
-def post_Text(user_Text, bot_id):
-    requests.post('https://api.groupme.com/v3/bots/post', params = {'bot_id' : bot_id, 'text' : user_Text})
+def post_text(user_text, bot_id):
+    requests.post('https://api.groupme.com/v3/bots/post', params = {'bot_id' : bot_id, 'text' : user_text})
 
 @app.route('/callback/<bot_id>', methods=['POST'])
 def parse_messages(bot_id):
@@ -20,20 +21,23 @@ def parse_messages(bot_id):
         return 'OK'
 
     # BUPD Things
-    if request.args.get('bupd', 'off') == 'on':
-        # Johnny Law
+    if request.args.get('bupd', 'off') != 'off':
         if "bupd" in message['text'].lower():
-            post_Text("JOHNNY LAW", bot_id)
+            post_text(bupd_responses[request.args.get('bupd','')], bot_id)
 
     # Say hello to anyone that says "Hi"
     if "Hi" in message['text']:
-        post_Text("Hi " + message['name'].split(" ")[0] + "!", bot_id)
+        x=5/0
+        post_text("Hi " + message['name'].split(" ")[0] + "!", bot_id)
 
     """
     # Get annoyed at long texts
     if len(message['text']) >= 300:
-        post_Text("Cool story bro.")
-        """
-
-
+        post_text("Cool story bro.")
+    """
     return 'OK'
+
+@app.errorhandler(werkzeug.exceptions.InternalServerError)
+def handle_error(e):
+    post_text(u'\u1F916\u1F915' + str(e))
+    return 'Not OK'
