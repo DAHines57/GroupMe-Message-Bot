@@ -33,9 +33,10 @@ def parse_messages(bot_id):
         if "Hi" in message['text']:
             post_text("Hi " + message['name'].split(" ")[0] + "!", bot_id)
 
+        # Post gif from Giphy
         if "/gif" in message['text']:
             gif_search = message['text'][5:]
-            post_text(gif.translate(gif_search), bot_id)
+            post_text(gif.translate(gif_search).fixed_height.downsampled.url, bot_id)
 
         """
         # Get annoyed at long texts
