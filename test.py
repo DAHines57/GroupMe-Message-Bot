@@ -39,5 +39,5 @@ def parse_messages(bot_id):
         """
         return 'OK'
     except Exception as e:
-            post_text(u'\U0001F916\U0001F915: ' + str(e), bot_id)
+            post_text(u'\U0001F916\u2620: ' + str(e), bot_id)
             return 'Not OK'
