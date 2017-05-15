@@ -1,5 +1,6 @@
 import os
 import requests
+import werkzeug
 from os.path import join, dirname
 from dotenv import load_dotenv
 from flask import Flask
@@ -39,5 +40,5 @@ def parse_messages(bot_id):
 
 @app.errorhandler(werkzeug.exceptions.InternalServerError)
 def handle_error(e):
-    post_text(u'\u1F916\u1F915' + str(e))
+    post_text(u'\U0001F916\U0001F915: ' + str(e))
     return 'Not OK'
