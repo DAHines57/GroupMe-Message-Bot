@@ -40,5 +40,5 @@ def parse_messages(bot_id):
 
 @app.errorhandler(werkzeug.exceptions.InternalServerError)
 def handle_error(e):
-    post_text(u'\U0001F916\U0001F915: ' + str(e))
+    post_text(u'\U0001F916\U0001F915: ' + str(e), bot_id)
     return 'Not OK'
