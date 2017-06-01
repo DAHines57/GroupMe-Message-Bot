@@ -9,4 +9,3 @@ Werkzeug==0.12.1
 gevent
 gunicorn
 giphypop
-APScheduler==3.3.1

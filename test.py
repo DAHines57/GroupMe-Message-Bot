@@ -7,7 +7,6 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 from flask import Flask
 from flask import request
-from apscheduler.schedulers.Gevent import GeventScheduler
 app = Flask(__name__)
 
 dotenv_path = join(dirname(__file__), '.env')
@@ -16,17 +15,10 @@ load_dotenv(dotenv_path)
 bupd_responses = {'jlaw': 'JOHNNY LAW'}
 sadness_texts = [line.strip() for line in open('list of saddness.txt')]
 gif = giphypop.Giphy()
-sched = GeventScheduler()
 
 
 def post_text(user_text, bot_id):
     requests.post('https://api.groupme.com/v3/bots/post', params = {'bot_id' : bot_id, 'text' : user_text})
-
-@sched.scheduled_job('interval', minutes=.5)
-def timed_job():
-    print('This job is run every three minutes.')
-
-sched.start()
 
 @app.route('/callback/<bot_id>', methods=['POST'])
 def parse_messages(bot_id):
