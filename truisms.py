@@ -9,5 +9,6 @@ sadness_texts = [line.strip() for line in open('list of saddness.txt')]
 
 central = timezone('US/Central')
 now = datetime.now(tz=pytz.utc)
-if (8 <= now.astimezone(central).hour <= 20):
-    post_text(random.choice(sadness_texts), sys.argv[1])
+if (8 <= now.astimezone(central).hour <= 21):
+    if(random.randint(0, 25) == 1):
+        post_text(random.choice(sadness_texts), sys.argv[1])
