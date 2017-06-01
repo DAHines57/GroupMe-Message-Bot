@@ -15,12 +15,6 @@ load_dotenv(dotenv_path)
 bupd_responses = {'jlaw': 'JOHNNY LAW'}
 gif = giphypop.Giphy()
 
-if os.environ.get('BOOT_GROUP') is not None:
-    print("FRICKLE FRACKLE")
-    last_commit = subprocess.run('git log -1 --pretty=format:%s', stdout=subprocess.PIPE).stdout
-    post_text(u'\U0001F916\U0001F305 Reporting for duty! Last update: ' + str(last_commit, encoding='utf-8'), os.environ.get('BOOT_GROUP'))
-else:
-    print("FRICKLE FRACKLE (ELSE)")
 
 @app.route('/callback/<bot_id>', methods=['POST'])
 def parse_messages(bot_id):
