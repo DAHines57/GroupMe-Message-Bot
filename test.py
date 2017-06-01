@@ -14,6 +14,8 @@ load_dotenv(dotenv_path)
 bupd_responses = {'jlaw': 'JOHNNY LAW'}
 gif = giphypop.Giphy()
 
+if os.environ.get('BOOT_GROUP') is not None:
+    post_text(u'\U0001F916\U0001F305 Reporting for duty!', os.environ.get('BOOT_GROUP'))
 
 @app.route('/callback/<bot_id>', methods=['POST'])
 def parse_messages(bot_id):
@@ -35,10 +37,6 @@ def parse_messages(bot_id):
         if message['text'].startswith("/gif"):
             gif_search = message['text'][5:]
             post_text(gif.translate(gif_search).media_url, bot_id)
-
-        # Everything in life is suffering and sorrow
-        if "sad" in message['text'].lower():
-            post_text(random.choice(sadness_texts), bot_id)
 
         """
         # Get annoyed at long texts
