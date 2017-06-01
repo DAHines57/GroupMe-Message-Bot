@@ -1,8 +1,7 @@
-import os
-import requests
-import werkzeug
+
 import giphypop
 import random
+from libs import post_text
 from os.path import join, dirname
 from dotenv import load_dotenv
 from flask import Flask
@@ -13,12 +12,8 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
 bupd_responses = {'jlaw': 'JOHNNY LAW'}
-sadness_texts = [line.strip() for line in open('list of saddness.txt')]
 gif = giphypop.Giphy()
 
-
-def post_text(user_text, bot_id):
-    requests.post('https://api.groupme.com/v3/bots/post', params = {'bot_id' : bot_id, 'text' : user_text})
 
 @app.route('/callback/<bot_id>', methods=['POST'])
 def parse_messages(bot_id):
