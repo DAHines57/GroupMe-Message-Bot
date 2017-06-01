@@ -1,4 +1,4 @@
-
+import os
 import giphypop
 import random
 from libs import post_text
