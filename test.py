@@ -12,7 +12,7 @@ app = Flask(__name__)
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
-bupd_responses = {'jlaw': 'JOHNNY LAW'}
+responses = {'jlaw': 'JOHNNY LAW', 'jar': 'CONSEQUENCE JAR'}
 gif = giphypop.Giphy()
 
 
@@ -26,7 +26,12 @@ def parse_messages(bot_id):
         # BUPD Things
         if request.args.get('bupd', 'off') != 'off':
             if "bupd" in message['text'].lower():
-                post_text(bupd_responses[request.args.get('bupd','')], bot_id)
+                post_text(responses[request.args.get('bupd','')], bot_id)
+
+        # CONSEQUENCE
+        if request.args.get('dorm', 'off') != 'off':
+            if "dorm" in message['text'].lower():
+                post_text(responses[request.args.get('dorm','')], bot_id)
 
         # Say hello to anyone that says "Hi"
         if "Hi" in message['text']:
