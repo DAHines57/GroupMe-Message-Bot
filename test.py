@@ -23,6 +23,8 @@ def parse_messages(bot_id):
         if message['sender_type'] != "user":
             return 'OK'
 
+""" Group Specific Actions"""
+
         # BUPD Things
         if request.args.get('bupd', 'off') != 'off':
             if "bupd" in message['text'].lower():
@@ -32,6 +34,9 @@ def parse_messages(bot_id):
         if request.args.get('dorm', 'off') != 'off':
             if "dorm" in message['text'].lower():
                 post_text(responses[request.args.get('dorm','')], bot_id)
+
+
+""" Actions for all groups"""
 
         # Say hello to anyone that says "Hi"
         if "Hi" in message['text']:
