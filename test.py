@@ -1,6 +1,7 @@
 import os
 import giphypop
 import random
+import re
 import subprocess
 from libs import post_text
 from os.path import join, dirname
@@ -27,12 +28,12 @@ def parse_messages(bot_id):
 
         # BUPD Things
         if request.args.get('bupd', 'off') != 'off':
-            if "bupd" in message['text'].lower():
+            if re.search(r"\bbupd\b", message['text'].lower()):
                 post_text(responses[request.args.get('bupd','')], bot_id)
 
         # CONSEQUENCE
         if request.args.get('dorm', 'off') != 'off':
-            if "dorm" in message['text'].lower():
+            if re.search(r"\bdorm\b", message['text'].lower()):
                 post_text(responses[request.args.get('dorm','')], bot_id)
 
 
