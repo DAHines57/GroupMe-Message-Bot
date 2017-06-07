@@ -33,7 +33,7 @@ def parse_messages(bot_id):
 
         # CONSEQUENCE
         if request.args.get('dorm', 'off') != 'off':
-            if re.search(r"\bdorm[s]?\b", message['text'].lower()):
+            if re.search(r"\bdorm[Ss]?\b", message['text'].lower()):
                 post_text(responses[request.args.get('dorm','')], bot_id)
 
 
