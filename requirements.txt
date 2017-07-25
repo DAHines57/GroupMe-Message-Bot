@@ -10,3 +10,4 @@ gevent
 gunicorn
 giphypop
 pytz
+icalendar
