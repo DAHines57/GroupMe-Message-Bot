@@ -20,13 +20,12 @@ client_secret = os.environ.get("SPOTIPY_CLIENT_SECRET")
 client_credentials_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-if request.args.get('spotify', '') != '':
-    sp.user_playlist(username, request.args.get('spotify', ''), 'tracks, next')
-    tracks = results['tracks']
-    all_tracks = tracks['items']
-    while tracks['next']:
-        tracks = spotify.next('tracks')
-        all_tracks += tracks['items']
+results = sp.user_playlist(username, sys.argv[2], 'tracks,next')
+tracks = results['tracks']
+all_tracks = tracks['items']
+while tracks['next']:
+    tracks = sp.next(tracks)
+    all_tracks += tracks['items']
 
-    random_track = random.choice(all_tracks)
-    post_text(random_track['name'] + ' - ' + track['artists'][0]['name'], sys.argv[1])
+random_track = random.choice(all_tracks)
+post_text(u'\U0001F3B5\U0001F4C5: ' + random_track['track']['name'] + ' - ' + random_track['track']['artists'][0]['name'] + ' ' + random_track['track']['external_urls']['spotify'], sys.argv[1])
