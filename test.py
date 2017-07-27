@@ -55,8 +55,8 @@ def parse_messages(bot_id):
         # Jokes
         if message['text'].startswith("/joke"):
             headers = {'Accept' : 'text/plain'}
-            joke = requests.get("https://icanhazdadjoke.com", headers=headers)
-            post_text(joke.text, bot_id)
+            joke = requests.get("https://icanhazdadjoke.com/j/92oOKusHBd", headers=headers)
+            post_text(joke.content.decode("UTF-8"), bot_id)
 
         return 'OK'
     except Exception as e:
