@@ -3,6 +3,7 @@ import giphypop
 import random
 import re
 import subprocess
+import requests
 from libs import post_text
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -27,12 +28,12 @@ def parse_messages(bot_id):
         """ Group Specific Actions"""
 
         # BUPD Things
-        if request.args.get('bupd', 'off') != 'off':
+        if request.args.get('bupd', '') != '':
             if re.search(r"\bbupd\b", message['text'].lower()):
                 post_text(responses[request.args.get('bupd','')], bot_id)
 
         # CONSEQUENCE
-        if request.args.get('dorm', 'off') != 'off':
+        if request.args.get('dorm', '') != '':
             if re.search(r"\bdorm[Ss]?\b", message['text'].lower()):
                 post_text(responses[request.args.get('dorm','')], bot_id)
 
@@ -40,19 +41,23 @@ def parse_messages(bot_id):
         """ Actions for all groups"""
 
         # Say hello to anyone that says "Hi"
-        if "Hi" in message['text']:
+        if re.search(r"\bhi\b", message['text'].lower()):
             post_text("Hi " + message['name'].split(" ")[0] + "!", bot_id)
 
         # Post gif from Giphy
         if message['text'].startswith("/gif"):
-            gif_search = message['text'][5:]
-            post_text(gif.translate(gif_search).media_url, bot_id)
+            search = re.search(r"/gif (.*?)( \d+)?$", message['text'])
+            (gif_search, num) = search.groups('1')
+            num = min(int(num), 5)
+            for i in range(int(num)):
+                post_text(gif.translate(gif_search).media_url, bot_id)
 
-        """
-        # Get annoyed at long texts
-        if len(message['text']) >= 300:
-            post_text("Cool story bro.")
-        """
+        # Jokes
+        if message['text'].startswith("/joke"):
+            headers = {'Accept' : 'text/plain'}
+            joke = requests.get("https://icanhazdadjoke.com", headers=headers)
+            post_text(joke.content.decode("UTF-8"), bot_id)
+
         return 'OK'
     except Exception as e:
             post_text(u'\U0001F916\u2620: ' + str(e), bot_id)
