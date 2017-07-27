@@ -46,7 +46,11 @@ def parse_messages(bot_id):
         # Post gif from Giphy
         if message['text'].startswith("/gif"):
             gif_search = message['text'][5:]
-            post_text(gif.translate(gif_search).media_url, bot_id)
+            num = re.search(r" \d+$", gif_search)
+            if num = "none":
+                num = 1
+            for i in range(num):
+                post_text(gif.translate(gif_search).media_url, bot_id)
 
         return 'OK'
     except Exception as e:
