@@ -51,6 +51,12 @@ def parse_messages(bot_id):
             for i in range(int(num)):
                 post_text(gif.translate(gif_search).media_url, bot_id)
 
+        # Jokes
+        if message['text'].startswith("/joke"):
+            headers = {'Accept' : 'text/plain'}
+            joke = requests.get("https://icanhazdadjoke.com", headers=headers)
+            post_text(joke.text, bot_id)
+
         return 'OK'
     except Exception as e:
             post_text(u'\U0001F916\u2620: ' + str(e), bot_id)
