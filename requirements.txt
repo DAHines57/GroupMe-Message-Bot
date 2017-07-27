@@ -11,3 +11,4 @@ gunicorn
 giphypop
 pytz
 icalendar
+spotipy
