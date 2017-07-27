@@ -5,6 +5,7 @@ from datetime import datetime
 import pytz
 from libs import post_text
 import spotipy
+import os
 from spotipy.oauth2 import SpotifyClientCredentials
 
 '''
