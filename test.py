@@ -3,6 +3,7 @@ import giphypop
 import random
 import re
 import subprocess
+import requests
 from libs import post_text
 from os.path import join, dirname
 from dotenv import load_dotenv
