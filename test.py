@@ -47,6 +47,7 @@ def parse_messages(bot_id):
         if message['text'].startswith("/gif"):
             search = re.search(r"/gif (.*)( \d+$)?", message['text'])
             (gif_search, num) = search.groups('1')
+            print (num)
             for i in range(int(num)):
                 post_text(gif.translate(gif_search).media_url, bot_id)
 
