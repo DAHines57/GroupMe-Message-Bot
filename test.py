@@ -48,9 +48,12 @@ def parse_messages(bot_id):
         if message['text'].startswith("/gif"):
             search = re.search(r"/gif (.*?)( \d+)?$", message['text'])
             (gif_search, num) = search.groups('1')
-            num = min(int(num), 5)
-            for i in range(int(num)):
-                post_text(gif.translate(gif_search).media_url, bot_id)
+            if num < 20:
+                num = min(int(num), 5)
+                for i in range(int(num)):
+                    post_text(gif.translate(gif_search).media_url, bot_id)
+            else:
+                post_text("Can you not.", bot_id)
 
         # Jokes
         if message['text'].startswith("/joke"):
