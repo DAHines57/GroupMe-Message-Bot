@@ -70,6 +70,15 @@ def parse_messages(bot_id):
                 clap += '\U0001F3FF'
             msg = clap.join(msg.split())
             post_text(msg, bot_id)
+        
+        # Hurr Durr
+        if message['text'].startswith("/durr"):
+            msg = message['text'][5:]
+            low = (x.lower() for x in msg[0::2])
+            upp = (x.upper() for x in msg[1::2])
+            msg = ''.join(a + b for a, b in zip(low, upp))
+            post_text(msg, bot_id)
+            post_text("http://i0.kym-cdn.com/entries/icons/original/000/022/940/spongebobicon.jpg", bot_id)
 
         # Jokes
         if message['text'].startswith("/joke"):
