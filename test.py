@@ -75,7 +75,7 @@ def parse_messages(bot_id):
 
         # Hurr Durr
         if message['text'].startswith("/durr"):
-            msg = last_message['text']
+            msg = last_message['text'] + ' '
             low = (x.lower() for x in msg[0::2])
             upp = (x.upper() for x in msg[1::2])
             msg = ''.join(a + b for a, b in zip(low, upp))
