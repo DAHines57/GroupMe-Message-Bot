@@ -37,6 +37,11 @@ def parse_messages(bot_id):
             if re.search(r"\bdorm[Ss]?\b", message['text'].lower()):
                 post_text(responses[request.args.get('dorm','')], bot_id)
 
+        #Professionalism
+        if request.args.get('punct', '') != '':
+            if !(message['text'].endswith(".","?","!"))
+                post_text("In the spirit of being professional, all messages must end with proper punctuation", bot_id)
+
 
         """ Actions for all groups"""
 
