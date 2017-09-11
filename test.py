@@ -4,6 +4,7 @@ import random
 import re
 import subprocess
 import requests
+import sys
 from libs import post_text
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -39,7 +40,7 @@ def parse_messages(bot_id):
 
         #Professionalism
         if request.args.get('punct', '') != '':
-            if not (message['text'].endswith((".","?","!"))):
+            if not (message['text'].endswith(".","?","!")):
                 post_text("""In the spirit of being professional,
                 all messages must end with proper punctuation.""", bot_id)
 
@@ -69,6 +70,6 @@ def parse_messages(bot_id):
             post_text(joke.content.decode("UTF-8"), bot_id)
 
         return 'OK'
-    except Exception as e:
-            post_text(u'\U0001F916\u2620: ' + str(e), bot_id)
+    except:
+            post_text(u'\U0001F916\u2620: ' + str(sys.exc_info()), bot_id)
             return 'Not OK'
