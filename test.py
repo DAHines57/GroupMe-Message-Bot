@@ -24,7 +24,7 @@ def parse_messages(bot_id):
     try:
         global last_message
         message = request.get_json()
-        last_message = message
+
         if message['sender_type'] != "user":
             return 'OK'
 
@@ -88,6 +88,8 @@ def parse_messages(bot_id):
             joke = requests.get("https://icanhazdadjoke.com", headers=headers)
             joke.raise_for_status()
             post_text(joke.content.decode("UTF-8"), bot_id)
+
+        last_message = message
 
         return 'OK'
     except:
