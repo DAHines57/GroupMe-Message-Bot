@@ -40,9 +40,8 @@ def parse_messages(bot_id):
 
         #Professionalism
         if request.args.get('punct', '') != '':
-            if not (message['text'].endswith(".","?","!")):
-                post_text("""In the spirit of being professional,
-                all messages must end with proper punctuation.""", bot_id)
+            if not (message['text'].strip.endswith((".","?","!"))):
+                post_text("In the spirit of being professional, all messages must end with proper punctuation.", bot_id)
 
 
         """ Actions for all groups"""
@@ -64,7 +63,7 @@ def parse_messages(bot_id):
 
         # Jokes
         if message['text'].startswith("/joke"):
-            headers = {'Accept' : 'text/plain'}
+            headers = {'Accept': 'text/plain'}
             joke = requests.get("https://icanhazdadjoke.com", headers=headers)
             joke.raise_for_status()
             post_text(joke.content.decode("UTF-8"), bot_id)
