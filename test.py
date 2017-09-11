@@ -4,7 +4,7 @@ import random
 import re
 import subprocess
 import requests
-import sys
+import traceback
 from libs import post_text
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -70,5 +70,5 @@ def parse_messages(bot_id):
 
         return 'OK'
     except:
-            post_text(u'\U0001F916\u2620: ' + str(sys.exc_info()), bot_id)
+            post_text(u'\U0001F916\u2620: ' + traceback.format_exc(), bot_id)
             return 'Not OK'
