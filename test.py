@@ -61,6 +61,16 @@ def parse_messages(bot_id):
             else:
                 post_text("Can you not.", bot_id)
 
+        # Clap a bunch
+        if message['text'].startswith("/clap"):
+            msg = message['text'][5:]
+            msg = msg.upper()
+            clap = '\U0001F44F'
+            if message['sender_id'] == '19791433':
+                clap += '\U0001F3FF'
+            msg = clap.join(msg.split())
+            post_text(msg, bot_id)
+
         # Jokes
         if message['text'].startswith("/joke"):
             headers = {'Accept': 'text/plain'}
