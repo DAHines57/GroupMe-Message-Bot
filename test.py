@@ -40,7 +40,7 @@ def parse_messages(bot_id):
 
         #Professionalism
         if request.args.get('punct', '') != '':
-            if not (message['text'].strip.endswith((".","?","!"))):
+            if not (message['text'].strip().endswith((".","?","!"))):
                 post_text("In the spirit of being professional, all messages must end with proper punctuation.", bot_id)
 
 
