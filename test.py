@@ -18,11 +18,13 @@ load_dotenv(dotenv_path)
 responses = {'jlaw': 'JOHNNY LAW', 'jar': 'CONSEQUENCE JAR'}
 gif = giphypop.Giphy()
 
-
+last_message = ''
 @app.route('/callback/<bot_id>', methods=['POST'])
 def parse_messages(bot_id):
     try:
+        global last_message
         message = request.get_json()
+        last_message = message
         if message['sender_type'] != "user":
             return 'OK'
 
@@ -73,7 +75,7 @@ def parse_messages(bot_id):
 
         # Hurr Durr
         if message['text'].startswith("/durr"):
-            msg = message['text'][5:]
+            msg = last_message['text'][5:]
             low = (x.lower() for x in msg[0::2])
             upp = (x.upper() for x in msg[1::2])
             msg = ''.join(a + b for a, b in zip(low, upp))
