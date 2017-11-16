@@ -45,6 +45,12 @@ def parse_messages(bot_id):
             if not (message['text'].strip().endswith((".","?","!"))):
                 post_text("In the spirit of being professional, all messages must end with proper punctuation.", bot_id)
 
+        #Throw Shade
+        if request.args.get('shade', '') != '':
+            shade_name = request.args.get('shade', '')
+            if message['name'].split(" ")[0] == shade_name:
+                post_text("SHE CALLED DYLAN A MAN SLAVE THAT'S NO WAY TO HAVE A HEALTHY RELATIONSHIP.", bot_id)
+
 
         """ Actions for all groups"""
 
