@@ -49,7 +49,7 @@ def parse_messages(bot_id):
         if request.args.get('shade', '') != '':
             shade_name = request.args.get('shade', '')
             if message['name'].split(" ")[0] == shade_name:
-                post_text("She called Dylan a man slave. That's no way to have a healthy relationship.", bot_id)
+                post_text("^^^Below Expectations^^^", bot_id)
 
 
         """ Actions for all groups"""
