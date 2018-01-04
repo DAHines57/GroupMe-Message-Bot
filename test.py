@@ -43,13 +43,13 @@ def parse_messages(bot_id):
         #Professionalism
         if request.args.get('punct', '') != '':
             if not (message['text'].strip().endswith((".","?","!"))):
-                post_text("\"Getting his wisdom teeth out\"", bot_id)
+                post_text("In the spirit of being professional, all messages must end with proper punctuation.", bot_id)
 
         #Throw Shade
         if request.args.get('shade', '') != '':
             shade_name = request.args.get('shade', '')
             if message['name'].split(" ")[0] == shade_name:
-                post_text("^^^Below Expectations^^^", bot_id)
+                post_text("\"Getting his wisdom teeth out\"", bot_id)
 
 
         """ Actions for all groups"""
