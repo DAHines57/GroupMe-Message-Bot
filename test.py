@@ -95,8 +95,10 @@ def parse_messages(bot_id):
             low = (x.lower() for x in msg[0::2])
             upp = (x.upper() for x in msg[1::2])
             msg = ''.join(a + b for a, b in zip(low, upp))
+            durr_url = "https://memegen.link/custom/hurr_durr_i'm " + message['name'].lower() + "/and_i_just_want_to_say.jpg?alt=http://i0.kym-cdn.com/entries/icons/original/000/022/940/spongebobicon.jpg"
+            post_text(durr_url, bot_id)
             post_text(msg, bot_id)
-            post_text("http://i0.kym-cdn.com/entries/icons/original/000/022/940/spongebobicon.jpg", bot_id)
+
 
         # Jokes
         if message['text'].startswith("/joke"):
