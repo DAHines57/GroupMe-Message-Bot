@@ -52,6 +52,15 @@ def parse_messages(bot_id):
             if sender in shadeText:
                 post_text(shadeText[sender], bot_id)
 
+        """ Admin Actions """
+
+        #Ventriloquism
+        if request.args.get('dummy', '') != '' and message['name'] == "Dylan Hines":
+            if message['text'].startswith("/dummy"):
+                msg = message['text'][len("/dummy"):]
+                post_text(msg, request.args.get('dummy', ''))
+
+
 
         """ Actions for all groups """
 
