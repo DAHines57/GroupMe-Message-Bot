@@ -18,6 +18,7 @@ load_dotenv(dotenv_path)
 
 responses = {'jlaw': 'JOHNNY LAW', 'jar': 'CONSEQUENCE JAR'}
 gif = giphypop.Giphy()
+admin_sender_id = os.environ.get("ADMIN_SENDER_ID"")
 
 last_message = ''
 @app.route('/callback/<bot_id>', methods=['POST'])
@@ -55,7 +56,7 @@ def parse_messages(bot_id):
         """ Admin Actions """
 
         #Ventriloquism
-        if request.args.get('dummy', '') != '' and message['name'] == "Dylan Hines":
+        if request.args.get('dummy', '') != '' and message['sender_id'] == admin_sender_id:
             if message['text'].startswith("/dummy"):
                 msg = message['text'][len("/dummy"):]
                 post_text(msg, request.args.get('dummy', ''))
@@ -84,7 +85,7 @@ def parse_messages(bot_id):
             msg = message['text'][5:]
             msg = msg.upper()
             clap = '\U0001F44F'
-            if message['sender_id'] == '19791433':
+            if message['sender_id'] == admin_sender_id:
                 clap += '\U0001F3FF'
             msg = clap.join(msg.split())
             post_text(msg, bot_id)
@@ -95,11 +96,14 @@ def parse_messages(bot_id):
             low = (x.lower() for x in msg[0::2])
             upp = (x.upper() for x in msg[1::2])
             msg = ''.join(a + b for a, b in zip(low, upp))
-            sender = message['name'].lower()
+            sender = last_message['name'].lower()
             sender = re.sub(r"\s", "_", sender)
             durr_url = "https://memegen.link/custom/hurr_durr_i'm_" + sender + "/and_i_just_want_to_say.jpg?alt=http://i0.kym-cdn.com/entries/icons/original/000/022/940/spongebobicon.jpg"
-            post_text(durr_url, bot_id)
-            post_text(msg, bot_id)
+            if last_message['sender_id'] != admin_sender_id or message['sender_id'] == admin_sender_id:
+                post_text(durr_url, bot_id)
+                post_text(msg, bot_id)
+            else:
+                post_text("I'm sorry Dave, I'm afraid I can't do that.", bot_id)
 
 
         # Jokes
