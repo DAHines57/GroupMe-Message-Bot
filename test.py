@@ -10,6 +10,7 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 from flask import Flask
 from flask import request
+from shade import shadeText
 app = Flask(__name__)
 
 dotenv_path = join(dirname(__file__), '.env')
@@ -28,7 +29,7 @@ def parse_messages(bot_id):
         if message['sender_type'] != "user":
             return 'OK'
 
-        """ Group Specific Actions"""
+        """ Group Specific Actions """
 
         # BUPD Things
         if request.args.get('bupd', '') != '':
@@ -47,12 +48,12 @@ def parse_messages(bot_id):
 
         #Throw Shade
         if request.args.get('shade', '') != '':
-            shade_name = request.args.get('shade', '')
-            if message['name'].split(" ")[0] == shade_name:
-                post_text("\"Getting his wisdom teeth out\"", bot_id)
+            sender = message['name']
+            if sender in shadeText:
+                post_text(shadeText[sender], bot_id)
 
 
-        """ Actions for all groups"""
+        """ Actions for all groups """
 
         # Say hello to anyone that says "Hi"
         if re.search(r"\bhi\b", message['text'].lower()):
