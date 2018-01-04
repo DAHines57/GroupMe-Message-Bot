@@ -18,7 +18,7 @@ load_dotenv(dotenv_path)
 
 responses = {'jlaw': 'JOHNNY LAW', 'jar': 'CONSEQUENCE JAR'}
 gif = giphypop.Giphy()
-admin_sender_id = os.environ.get("ADMIN_SENDER_ID"")
+admin_sender_id = os.environ.get("ADMIN_SENDER_ID")
 
 last_message = ''
 @app.route('/callback/<bot_id>', methods=['POST'])
