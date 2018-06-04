@@ -19,8 +19,8 @@ app = Flask(__name__)
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
-#database_url = os.environ.get("DATABASE_URL")
-#engine = create_engine(database_url)
+database_url = os.environ.get("DATABASE_URL")
+engine = create_engine(database_url)
 
 responses = {'jlaw': 'JOHNNY LAW', 'jar': 'CONSEQUENCE JAR'}
 gif = giphypop.Giphy()
