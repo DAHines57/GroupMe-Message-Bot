@@ -12,4 +12,5 @@ giphypop
 pytz
 icalendar
 spotipy
-psycopg2
+psycopg2-binary
+sqlalchemy
