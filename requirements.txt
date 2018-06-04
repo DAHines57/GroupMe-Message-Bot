@@ -12,3 +12,4 @@ giphypop
 pytz
 icalendar
 spotipy
+psycopg2
