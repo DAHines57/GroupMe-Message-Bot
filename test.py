@@ -93,7 +93,7 @@ def parse_messages(bot_id):
                     post_text(durr_url, bot_id)
                     post_text(msg, bot_id)
                 else:
-                    post_text("I'm sorry Dave, I'm afraid I can't do that.", bot_id)
+                    post_text("I'm sorry " + message['name'] + ", I'm afraid I can't do that.", bot_id)
 
         # Jokes
         if message['text'].startswith("/joke"):
@@ -103,7 +103,7 @@ def parse_messages(bot_id):
             post_text(joke.content.decode("UTF-8"), bot_id)
 
         """ Store Last Message """
-        
+
         if message['sender_type'] == "user":
             store_last_msg(message['group_id'], message['id'], message['text'], message['name'], message['sender_id'])
 

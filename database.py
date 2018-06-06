@@ -41,7 +41,7 @@ def find_last_msg(groupId):
     row = result.fetchone()
     if not row:
         print("No group by that name")
-        return False
+        return None
     else:
         return row
     result.close()
