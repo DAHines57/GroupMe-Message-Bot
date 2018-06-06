@@ -95,7 +95,7 @@ def parse_messages(bot_id):
                 post_text("I'm sorry Dave, I'm afraid I can't do that.", bot_id)
 
         # Jokes
-        if message['text'].startswith("!joke"):
+        if message['text'].startswith("/joke"):
             headers = {'Accept': 'text/plain'}
             joke = requests.get("https://icanhazdadjoke.com", headers=headers)
             joke.raise_for_status()
