@@ -30,7 +30,7 @@ def parse_messages(bot_id):
         message = request.get_json()
 
         if message['sender_type'] == "user":
-            store_last_msg(message['group_id'], message['id'], message['text'])
+            store_last_msg(message['group_id'], message['id'], message['text'], message['name'], message['sender_id'])
 
         if message['sender_type'] != "user":
             return 'OK'
