@@ -20,6 +20,7 @@ def store_last_msg(groupId, msgId, msgText, name, senderId):
      print(groupId)
      result = conn.execute(s)
      row = result.fetchall()
+     print(row)
      if not row:
          print("Insert")
          ins = last_msg.insert().values(group_id = groupId, msg_id = msgId, msg_txt = msgText,\
