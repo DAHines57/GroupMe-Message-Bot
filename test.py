@@ -5,6 +5,7 @@ import re
 import subprocess
 import requests
 import traceback
+import database
 from libs import post_text
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -17,8 +18,6 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
 
-
-responses = {'jlaw': 'JOHNNY LAW', 'jar': 'CONSEQUENCE JAR'}
 gif = giphypop.Giphy()
 admin_sender_id = os.environ.get("ADMIN_SENDER_ID")
 
@@ -26,28 +25,13 @@ last_message = ''
 @app.route('/callback/<bot_id>', methods=['POST'])
 def parse_messages(bot_id):
     try:
-        global last_message
         message = request.get_json()
+        store_last_msg(message['group_id'], message['id'],""" message['sender_id'],""" message['text'])
 
         if message['sender_type'] != "user":
             return 'OK'
 
         """ Group Specific Actions """
-
-        # BUPD Things
-        if request.args.get('bupd', '') != '':
-            if re.search(r"\bbupd\b", message['text'].lower()):
-                post_text(responses[request.args.get('bupd','')], bot_id)
-
-        # CONSEQUENCE
-        if request.args.get('dorm', '') != '':
-            if re.search(r"\bdorm[Ss]?\b", message['text'].lower()):
-                post_text(responses[request.args.get('dorm','')], bot_id)
-
-        #Professionalism
-        if request.args.get('punct', '') != '':
-            if not (message['text'].strip().endswith((".","?","!"))):
-                post_text("In the spirit of being professional, all messages must end with proper punctuation.", bot_id)
 
         #Throw Shade
         if request.args.get('shade', '') != '':
@@ -62,7 +46,6 @@ def parse_messages(bot_id):
             if message['text'].startswith("/dummy"):
                 msg = message['text'][len("/dummy"):]
                 post_text(msg, request.args.get('dummy', ''))
-
 
 
         """ Actions for all groups """
@@ -107,7 +90,6 @@ def parse_messages(bot_id):
             else:
                 post_text("I'm sorry Dave, I'm afraid I can't do that.", bot_id)
 
-
         # Jokes
         if message['text'].startswith("/joke"):
             headers = {'Accept': 'text/plain'}
@@ -115,7 +97,6 @@ def parse_messages(bot_id):
             joke.raise_for_status()
             post_text(joke.content.decode("UTF-8"), bot_id)
 
-        last_message = message
 
         return 'OK'
     except:
