@@ -47,8 +47,8 @@ def parse_messages(bot_id):
 
         #Ventriloquism
         if request.args.get('dummy', '') != '' and message['sender_id'] == admin_sender_id:
-            if message['text'].startswith("!dummy"):
-                msg = message['text'][len("!dummy"):]
+            if message['text'].startswith("/dummy"):
+                msg = message['text'][len("/dummy"):]
                 post_text(msg, request.args.get('dummy', ''))
 
 
@@ -59,8 +59,8 @@ def parse_messages(bot_id):
             post_text("Hi " + message['name'].split(" ")[0] + "!", bot_id)
 
         # Post gif from Giphy
-        if message['text'].startswith("!gif"):
-            search = re.search(r"!gif (.*?)( \d+)?$", message['text'])
+        if message['text'].startswith("/gif"):
+            search = re.search(r"/gif (.*?)( \d+)?$", message['text'])
             (gif_search, num) = search.groups('1')
             if int(num) < 20:
                 num = min(int(num), 5)
@@ -70,7 +70,7 @@ def parse_messages(bot_id):
                 post_text("Can you not.", bot_id)
 
         # Clap a bunch
-        if message['text'].startswith("!clap"):
+        if message['text'].startswith("/clap"):
             msg = message['text'][5:]
             msg = msg.upper()
             clap = '\U0001F44F'
@@ -80,7 +80,7 @@ def parse_messages(bot_id):
             post_text(msg, bot_id)
 
         # Hurr Durr
-        if message['text'].startswith("!durr"):
+        if message['text'].startswith("/durr"):
             msg = last_message['text'] + ' '
             low = (x.lower() for x in msg[0::2])
             upp = (x.upper() for x in msg[1::2])
