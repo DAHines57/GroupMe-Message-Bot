@@ -16,6 +16,7 @@ last_msg = Table('last_msg', meta, autoload=True, autoload_with=engine, schema='
 
 def store_last_msg(groupId, msgId, msgText):
      print("Select")
+     print(last_msg)
      s=select([last_msg]).where(last_msg.c.group_id == groupId)
      result = conn.execute(s)
      row = result.fetchall()
