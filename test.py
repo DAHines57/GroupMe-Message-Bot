@@ -81,18 +81,21 @@ def parse_messages(bot_id):
 
         # Hurr Durr
         if message['text'].startswith("/durr"):
-            msg = last_message['text'] + ' '
-            low = (x.lower() for x in msg[0::2])
-            upp = (x.upper() for x in msg[1::2])
-            msg = ''.join(a + b for a, b in zip(low, upp))
-            sender = last_message['name'].lower()
-            sender = re.sub(r"\s", "_", sender)
-            durr_url = "https://memegen.link/custom/hurr_durr_i'm_" + sender + "/and_i_just_want_to_say.jpg?alt=http://i0.kym-cdn.com/entries/icons/original/000/022/940/spongebobicon.jpg"
-            if last_message['sender_id'] != admin_sender_id or message['sender_id'] == admin_sender_id:
-                post_text(durr_url, bot_id)
-                post_text(msg, bot_id)
-            else:
-                post_text("I'm sorry Dave, I'm afraid I can't do that.", bot_id)
+            msg_row = find_last_msg(message['group_id'])
+            if msg_row:
+                msg = msg_row[0]
+                sender = msg_row[1].lower()
+                lastSenderId = msg_row[2]
+                low = (x.lower() for x in msg[0::2])
+                upp = (x.upper() for x in msg[1::2])
+                msg = ''.join(a + b for a, b in zip(low, upp))
+                sender = re.sub(r"\s", "_", sender)
+                durr_url = "https://memegen.link/custom/hurr_durr_i'm_" + sender + "/and_i_just_want_to_say.jpg?alt=http://i0.kym-cdn.com/entries/icons/original/000/022/940/spongebobicon.jpg"
+                if lastSenderId != admin_sender_id or message['sender_id'] == admin_sender_id:
+                    post_text(durr_url, bot_id)
+                    post_text(msg, bot_id)
+                else:
+                    post_text("I'm sorry Dave, I'm afraid I can't do that.", bot_id)
 
         # Jokes
         if message['text'].startswith("/joke"):
