@@ -60,7 +60,7 @@ def parse_messages(bot_id):
 
         # Post gif from Giphy
         if message['text'].startswith("!gif"):
-            search = re.search(r"/gif (.*?)( \d+)?$", message['text'])
+            search = re.search(r"!gif (.*?)( \d+)?$", message['text'])
             (gif_search, num) = search.groups('1')
             if int(num) < 20:
                 num = min(int(num), 5)
