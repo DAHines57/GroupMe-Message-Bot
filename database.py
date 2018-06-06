@@ -26,7 +26,7 @@ def store_last_msg(groupId, msgId, msgText, name, senderId):
                                         sender_name = name, sender_id = senderId)
          result = conn.execute(ins)
      else:
-          print("Update")
+         print("Update")
          upd = last_msg.update().where(last_msg.c.group_id == groupId).\
          values(group_id = groupId, msg_id = msgId, msg_txt = msgText, sender_name = name, sender_id = senderId)
          result = conn.execute(upd)
