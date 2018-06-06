@@ -6,6 +6,7 @@ import subprocess
 import requests
 import traceback
 import database
+from database import store_last_msg
 from libs import post_text
 from os.path import join, dirname
 from dotenv import load_dotenv
