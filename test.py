@@ -26,10 +26,9 @@ last_message = ''
 @app.route('/callback/<bot_id>', methods=['POST'])
 def parse_messages(bot_id):
     try:
-        message = request.get_json()
 
-    """    if message['sender_type'] == "user":
-            store_last_msg(message['group_id'], message['id'], message['text'])"""
+        if message['sender_type'] == "user":
+            store_last_msg(message['group_id'], message['id'], message['text'])
 
         if message['sender_type'] != "user":
             return 'OK'
