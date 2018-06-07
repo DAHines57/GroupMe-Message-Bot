@@ -11,11 +11,12 @@ engine = create_engine(database_url)
 
 Base = declarative_base(engine)
 meta=MetaData(bind=engine)
-conn = engine.connect()
+
 
 last_msg = Table('last_msg', meta, autoload=True, autoload_with=engine, schema='bot')
 
 def store_last_msg(groupId, msgId, msgText, name, senderId):
+    conn = engine.connect()
     print("Select")
     s=select([last_msg]).where(last_msg.c.group_id == groupId)
     print(groupId)
@@ -33,9 +34,11 @@ def store_last_msg(groupId, msgId, msgText, name, senderId):
         values(group_id = groupId, msg_id = msgId, msg_txt = msgText, sender_name = name, sender_id = senderId)
         result = conn.execute(upd)
     result.close()
+    conn.close()
     print("Done")
 
 def find_last_msg(groupId):
+    conn = engine.connect()
     s=select([last_msg.c.msg_txt, last_msg.c.sender_name, last_msg.c.sender_id]).where(last_msg.c.group_id == groupId)
     result = conn.execute(s)
     row = result.fetchone()
@@ -45,4 +48,5 @@ def find_last_msg(groupId):
     else:
         return row
     result.close()
+    conn.close()
     print("Done")
