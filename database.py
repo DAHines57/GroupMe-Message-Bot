@@ -62,7 +62,7 @@ def add_person(userId, name):
     if not row:
         print("Insert person")
         ins = people.insert().values(user_id = userId, current_name = name)
-        result = conn.execute(s)
+        result = conn.execute(ins)
     else:
         print("Update person")
         upd = people.update().where(people.c.user_id == userId).values(user_id = userId, current_name = name)
