@@ -88,8 +88,7 @@ def parse_messages(bot_id):
                 upp = (x.upper() for x in msg[1::2])
                 msg = ''.join(a + b for a, b in zip(low, upp))
                 sender = re.sub(r"\s", "_", sender)
-                #durr_url = "https://memegen.link/custom/hurr_durr_i'm_" + sender + "/and_i_just_want_to_say.jpg?alt=http://i0.kym-cdn.com/entries/icons/original/000/022/940/spongebobicon.jpg"
-                durr_url = "https://memegen.link/spongebob/hurr_durr_i'm_" + sender + "/and_i_just_want_to_say.jpg?watermark=none"
+                durr_url = "https://memegen.link/spongebob/hurr_durr_i'm_" + sender + "/and_i_just_want_to_say.jpg?watermark=none&height=600&width=600"
                 if lastSenderId != admin_sender_id or message['sender_id'] == admin_sender_id:
                     post_text(durr_url, bot_id)
                     post_text(msg, bot_id)
