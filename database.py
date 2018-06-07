@@ -14,39 +14,59 @@ meta=MetaData(bind=engine)
 
 
 last_msg = Table('last_msg', meta, autoload=True, autoload_with=engine, schema='bot')
+people = Table('people', meta, autoload=True, autoload_with=engine, schema='bot')
 
 def store_last_msg(groupId, msgId, msgText, name, senderId):
     conn = engine.connect()
-    print("Select")
-    s=select([last_msg]).where(last_msg.c.group_id == groupId)
+    print("Select msg")
+    s = select([last_msg]).where(last_msg.c.group_id == groupId)
     print(groupId)
     result = conn.execute(s)
     row = result.fetchall()
     print(row)
     if not row:
-        print("Insert")
+        print("Insert msg")
         ins = last_msg.insert().values(group_id = groupId, msg_id = msgId, msg_txt = msgText,\
                                         sender_name = name, sender_id = senderId)
         result = conn.execute(ins)
     else:
-        print("Update")
+        print("Update msg")
         upd = last_msg.update().where(last_msg.c.group_id == groupId).\
         values(group_id = groupId, msg_id = msgId, msg_txt = msgText, sender_name = name, sender_id = senderId)
         result = conn.execute(upd)
     result.close()
     conn.close()
-    print("Done")
+    print("Done msg")
 
 def find_last_msg(groupId):
     conn = engine.connect()
-    s=select([last_msg.c.msg_txt, last_msg.c.sender_name, last_msg.c.sender_id]).where(last_msg.c.group_id == groupId)
+    s = select([last_msg.c.msg_txt, last_msg.c.sender_name, last_msg.c.sender_id]).where(last_msg.c.group_id == groupId)
     result = conn.execute(s)
     row = result.fetchone()
     if not row:
         print("No group by that name")
         return None
     else:
+        print("Found")
         return row
     result.close()
     conn.close()
-    print("Done")
+    print("Done find")
+
+def add_person(userId, name):
+    conn = engine.connect()
+    print("Select person")
+    s = select([people]).where(and_(people.c.user_id == userId, people.c.current_name == name))
+    result = conn.execute(s)
+    row = result.fetchall()
+    if not row:
+        print("Insert person")
+        ins = people.insert().values(user_id = userId, current_name = name)
+        result = conn.execute(s)
+    else:
+        print("Update person")
+        upd = people.update().where(people.c.user_id == userId).values(user_id = userId, current_name = name)
+        result = conn.execute(upd)
+    result.close()
+    conn.close()
+    print("Done person")

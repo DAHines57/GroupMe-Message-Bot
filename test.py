@@ -6,8 +6,7 @@ import subprocess
 import requests
 import traceback
 import database
-from database import store_last_msg
-from database import find_last_msg
+from database import *
 from libs import post_text
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -106,6 +105,7 @@ def parse_messages(bot_id):
 
         if message['sender_type'] == "user":
             store_last_msg(message['group_id'], message['id'], message['text'], message['name'], message['sender_id'])
+            add_person(message['sender_id'], message['name'])
 
 
         return 'OK'
