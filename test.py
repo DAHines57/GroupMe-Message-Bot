@@ -80,7 +80,7 @@ def parse_messages(bot_id):
         if message['text'].lower().startswith("/durr"):
             msg_row = find_last_msg(message['group_id'])
             if msg_row:
-                msg = msg_row[0]
+                msg = msg_row[0] + " "
                 sender = msg_row[1].lower()
                 lastSenderId = msg_row[2]
                 low = (x.lower() for x in msg[0::2])
