@@ -57,7 +57,7 @@ def parse_messages(bot_id):
             post_text("Hi " + message['name'].split(" ")[0] + "!", bot_id)
 
         # Post gif from Giphy
-        if message['text'].startswith("/gif"):
+        if message['text'].lower().startswith("/gif"):
             search = re.search(r"/gif (.*?)( \d+)?$", message['text'])
             (gif_search, num) = search.groups('1')
             if int(num) < 20:
@@ -68,7 +68,7 @@ def parse_messages(bot_id):
                 post_text("Can you not.", bot_id)
 
         # Clap a bunch
-        if message['text'].startswith("/clap"):
+        if message['text'].lower().startswith("/clap"):
             msg = message['text'][5:]
             msg = msg.upper()
             clap = '\U0001F44F'
@@ -78,7 +78,7 @@ def parse_messages(bot_id):
             post_text(msg, bot_id)
 
         # Hurr Durr
-        if message['text'].startswith("/durr"):
+        if message['text'].lower().startswith("/durr"):
             msg_row = find_last_msg(message['group_id'])
             if msg_row:
                 msg = msg_row[0]
@@ -96,7 +96,7 @@ def parse_messages(bot_id):
                     post_text("I'm sorry " + message['name'].split(" ")[0] + ", I'm afraid I can't do that.", bot_id)
 
         # Jokes
-        if message['text'].startswith("/joke"):
+        if message['text'].lower().startswith("/joke"):
             headers = {'Accept': 'text/plain'}
             joke = requests.get("https://icanhazdadjoke.com", headers=headers)
             joke.raise_for_status()
