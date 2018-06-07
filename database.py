@@ -56,7 +56,7 @@ def find_last_msg(groupId):
 def add_person(userId, name):
     conn = engine.connect()
     print("Select person")
-    s = select([people]).where(and_(people.c.user_id == userId, people.c.current_name == name))
+    s = select([people]).where(and_(people.c.user_id == userId))
     result = conn.execute(s)
     row = result.fetchall()
     if not row:
