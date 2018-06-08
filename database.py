@@ -15,6 +15,7 @@ meta=MetaData(bind=engine)
 
 last_msg = Table('last_msg', meta, autoload=True, autoload_with=engine, schema='bot')
 people = Table('people', meta, autoload=True, autoload_with=engine, schema='bot')
+groups = Table('groups', meta, autoload=True, autoload_with=engine, schema='bot')
 
 def store_last_msg(groupId, msgId, msgText, name, senderId):
     conn = engine.connect()
@@ -70,3 +71,14 @@ def add_person(userId, name):
     result.close()
     conn.close()
     print("Done person")
+
+def add_group(groupId):
+    conn = engine.connect()
+    print("Select group")
+    s = select([groups]).where(and_(groups.c.group_id == groupId))
+    result = conn.execute(s)
+    row = result.fetchall()
+    if not row:
+        print("Insert group")
+        ins = groups.insert().values(group_id = groupId)
+        result = conn.execute(ins)
