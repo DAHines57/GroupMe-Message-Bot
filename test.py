@@ -32,21 +32,23 @@ def parse_messages(bot_id):
         if message['sender_type'] != "user":
             return 'OK'
 
-        """ Group Specific Actions """
-
-        #Throw Shade
-        if request.args.get('shade', '') != '':
-            sender = message['name']
-            if sender in shadeText:
-                post_text(shadeText[sender], bot_id)
-
         """ Admin Actions """
 
         #Ventriloquism
         if message['text'].startswith("/dummy") and message['sender_id'] == admin_sender_id:
             search = re.search(r"/dummy (.*?) (.*?)$", message['text'])
             (nickname, msg) = search.groups('test post pls ignore')
-            groupId = find_dummy_group(nickname)
+            if(nickname == 'help'):
+                dummies = show_all_dummy()
+                msg = "All available dummies:\n"
+                for x in dummies:
+                    msg += x + "\n"
+                dummy_bot = bot_id
+            else:
+                dummy_bot = find_dummy_bot(nickname)[0]
+                if not dummy_bot:
+                    dummy_bot = bot_id
+                    msg = "No group with nickname '" + nickname + "'"
             post_text(msg, dummy_bot)
 
 

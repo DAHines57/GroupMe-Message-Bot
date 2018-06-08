@@ -48,11 +48,11 @@ def find_last_msg(groupId):
         print("No group by that name")
         return None
     else:
-        print("Found")
+        print("Found message")
         return row
     result.close()
     conn.close()
-    print("Done find")
+    print("Done find message")
 
 def add_person(userId, name):
     conn = engine.connect()
@@ -89,3 +89,35 @@ def add_group(groupId, botId):
     result.close()
     conn.close()
     print("Done group")
+
+def find_dummy_bot(nname):
+        conn = engine.connect()
+        print("Select group")
+        s = select([groups.c.bot_id]).where(groups.c.nickname == nname)
+        result = conn.execute(s)
+        row = result.fetchall()
+        if not row:
+            print("No dummy here")
+            return None
+        else:
+            print("Found dummy")
+            return row
+        result.close()
+        conn.close()
+        print("Done find message")
+
+def show_all_dummy():
+        conn = engine.connect()
+        print("Select group")
+        s = select([groups.c.nickname]).where(groups.c.nickname == nname)
+        result = conn.execute(s)
+        row = result.fetchall()
+        if not row:
+            print("No dummy bots")
+            return None
+        else:
+            print("Got all dummies")
+            return row
+        result.close()
+        conn.close()
+        print("Done find dummies")
