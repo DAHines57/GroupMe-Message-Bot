@@ -48,8 +48,8 @@ def parse_messages(bot_id):
                 if not dummy_bot:
                     dummy_bot = bot_id
                     msg = "No group with nickname '" + nickname + "'"
-            print(msg)
-            print(dummy_bot)
+            print("Dummy msg: "+ msg)
+            print("Dummy bot: " + dummy_bot)
             post_text(msg, dummy_bot)
 
 
