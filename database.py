@@ -109,7 +109,7 @@ def find_dummy_bot(nname):
 def show_all_dummy():
         conn = engine.connect()
         print("Select group")
-        s = select([groups.c.nickname]).where(groups.c.nickname == nname)
+        s = select([groups.c.nickname])
         result = conn.execute(s)
         row = result.fetchall()
         if not row:
