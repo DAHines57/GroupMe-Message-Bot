@@ -51,6 +51,9 @@ def parse_messages(bot_id):
                     msg = "No group with nickname '" + nickname + "'"
             print("Dummy msg: "+ msg)
             print("Dummy bot: " + dummy_bot)
+        else:
+            dummy_bot = bot_id
+            msg = "I'm sorry " + message['name'].split(" ")[0] + ", I'm afraid I can't do that."
             post_text(msg, dummy_bot)
 
 
