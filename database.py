@@ -21,10 +21,8 @@ def store_last_msg(groupId, msgId, msgText, name, senderId):
     conn = engine.connect()
     print("Select msg")
     s = select([last_msg]).where(last_msg.c.group_id == groupId)
-    print(groupId)
     result = conn.execute(s)
     row = result.fetchall()
-    print(row)
     if not row:
         print("Insert msg")
         ins = last_msg.insert().values(group_id = groupId, msg_id = msgId, msg_txt = msgText,\

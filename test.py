@@ -35,6 +35,7 @@ def parse_messages(bot_id):
 
         #Ventriloquism
         if message['text'].startswith("/dummy") and message['sender_id'] == admin_sender_id:
+            print("Start dummy")
             search = re.search(r"/dummy (\S*+)\s?(.*)?$", message['text'])
             (nickname, msg) = search.groups('test post pls ignore')
             if(nickname == 'help'):
