@@ -34,27 +34,28 @@ def parse_messages(bot_id):
         """ Admin Actions """
 
         #Ventriloquism
-        if message['text'].startswith("/dummy") and message['sender_id'] == admin_sender_id:
-            print("Start dummy")
-            search = re.search(r"/dummy (\S*)\s?(.*)?$", message['text'])
-            (nickname, msg) = search.groups('test post pls ignore')
-            if(nickname == 'help'):
-                dummies = show_all_dummy()
-                msg = "All available dummies:\n"
-                for x in dummies:
-                    msg += x[0] + "\n"
-                dummy_bot = bot_id
-            else:
-                dummy_bot = find_dummy_bot(nickname)[0][0]
-                if not dummy_bot:
+        if message['text'].startswith("/dummy")
+            if message['sender_id'] == admin_sender_id:
+                print("Start dummy")
+                search = re.search(r"/dummy (\S*)\s?(.*)?$", message['text'])
+                (nickname, msg) = search.groups('test post pls ignore')
+                if(nickname == 'help'):
+                    dummies = show_all_dummy()
+                    msg = "All available dummies:\n"
+                    for x in dummies:
+                        msg += x[0] + "\n"
                     dummy_bot = bot_id
-                    msg = "No group with nickname '" + nickname + "'"
-            print("Dummy msg: "+ msg)
-            print("Dummy bot: " + dummy_bot)
-        else:
-            dummy_bot = bot_id
-            msg = "I'm sorry " + message['name'].split(" ")[0] + ", I'm afraid I can't do that."
-        post_text(msg, dummy_bot)
+                else:
+                    dummy_bot = find_dummy_bot(nickname)[0][0]
+                    if not dummy_bot:
+                        dummy_bot = bot_id
+                        msg = "No group with nickname '" + nickname + "'"
+                print("Dummy msg: "+ msg)
+                print("Dummy bot: " + dummy_bot)
+            else:
+                dummy_bot = bot_id
+                msg = "I'm sorry " + message['name'].split(" ")[0] + ", I'm afraid I can't do that."
+            post_text(msg, dummy_bot)
 
 
         """ Actions for all groups """
