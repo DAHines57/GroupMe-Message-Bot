@@ -54,7 +54,7 @@ def parse_messages(bot_id):
         else:
             dummy_bot = bot_id
             msg = "I'm sorry " + message['name'].split(" ")[0] + ", I'm afraid I can't do that."
-            post_text(msg, dummy_bot)
+        post_text(msg, dummy_bot)
 
 
         """ Actions for all groups """
