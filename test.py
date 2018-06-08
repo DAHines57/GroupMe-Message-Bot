@@ -45,7 +45,7 @@ def parse_messages(bot_id):
                     msg += x[0] + "\n"
                 dummy_bot = bot_id
             else:
-                dummy_bot = find_dummy_bot(nickname)[0]
+                dummy_bot = find_dummy_bot(nickname)[0][0]
                 if not dummy_bot:
                     dummy_bot = bot_id
                     msg = "No group with nickname '" + nickname + "'"
