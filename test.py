@@ -12,7 +12,6 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 from flask import Flask
 from flask import request
-from shade import shadeText
 app = Flask(__name__)
 
 dotenv_path = join(dirname(__file__), '.env')
