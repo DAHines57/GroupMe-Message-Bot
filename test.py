@@ -35,13 +35,13 @@ def parse_messages(bot_id):
 
         #Ventriloquism
         if message['text'].startswith("/dummy") and message['sender_id'] == admin_sender_id:
-            search = re.search(r"/dummy (.*?) (.*)?$", message['text'])
+            search = re.search(r"/dummy (\S*+)\s?(.*)?$", message['text'])
             (nickname, msg) = search.groups('test post pls ignore')
             if(nickname == 'help'):
                 dummies = show_all_dummy()
                 msg = "All available dummies:\n"
                 for x in dummies:
-                    msg += x + "\n"
+                    msg += x[0] + "\n"
                 dummy_bot = bot_id
             else:
                 dummy_bot = find_dummy_bot(nickname)[0]
