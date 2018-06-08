@@ -47,7 +47,7 @@ def parse_messages(bot_id):
             search = re.search(r"/dummy (.*?) (.*?)$", message['text'])
             (nickname, msg) = search.groups('test post pls ignore')
             groupId = find_dummy_group(nickname)
-            post_text(msg, groupId)
+            post_text(msg, dummy_bot)
 
 
         """ Actions for all groups """
@@ -107,7 +107,7 @@ def parse_messages(bot_id):
         if message['sender_type'] == "user":
             store_last_msg(message['group_id'], message['id'], message['text'], message['name'], message['sender_id'])
             add_person(message['sender_id'], message['name'])
-            add_group(message['group_id'])
+            add_group(message['group_id'], bot_id)
 
 
         return 'OK'

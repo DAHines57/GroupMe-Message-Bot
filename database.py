@@ -57,7 +57,7 @@ def find_last_msg(groupId):
 def add_person(userId, name):
     conn = engine.connect()
     print("Select person")
-    s = select([people]).where(and_(people.c.user_id == userId))
+    s = select([people]).where(people.c.user_id == userId)
     result = conn.execute(s)
     row = result.fetchall()
     if not row:
@@ -72,13 +72,20 @@ def add_person(userId, name):
     conn.close()
     print("Done person")
 
-def add_group(groupId):
+def add_group(groupId, botId):
     conn = engine.connect()
     print("Select group")
-    s = select([groups]).where(and_(groups.c.group_id == groupId))
+    s = select([groups]).where(groups.c.group_id == groupId)
     result = conn.execute(s)
     row = result.fetchall()
     if not row:
         print("Insert group")
-        ins = groups.insert().values(group_id = groupId)
+        ins = groups.insert().values(group_id = groupId, bot_id = botId)
         result = conn.execute(ins)
+    else:
+        print("Update group")
+        upd = groups.update().where(groups.c.group_id == groupId).values(bot_id = botId)
+        result = conn.execute(upd)
+    result.close()
+    conn.close()
+    print("Done group")
