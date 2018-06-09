@@ -13,5 +13,6 @@ def post_text_mention(user_text, bot_id, user_name):
     if len(user_text.strip()) == 0:
         raise ValueError("Can't post empty message")
     mention_id = get_user_id(user_name)[0]
-    requests.post('https://api.groupme.com/v3/bots/post', params = {'attachments' :[{"loci":[[0,5]],"type":"mentions","user_ids":[mention_id]}] 
+    print("User id: " + mention_id)
+    requests.post('https://api.groupme.com/v3/bots/post', params = {'attachments' :[{"loci":[[0,5]],"type":"mentions","user_ids":[mention_id]}]
     ,'bot_id' : bot_id, 'text' : user_text}).raise_for_status()
