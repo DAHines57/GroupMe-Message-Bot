@@ -34,7 +34,7 @@ def store_last_msg(groupId, msgId, msgText, name, senderId):
         result = conn.execute(upd)
     result.close()
     conn.close()
-    print("Done msg")
+    print("Done storing msg")
 
 def find_last_msg(groupId):
     conn = engine.connect()
@@ -49,7 +49,7 @@ def find_last_msg(groupId):
         return row
     result.close()
     conn.close()
-    print("Done find message")
+    print("Done finding message")
 
 def add_person(userId, name):
     conn = engine.connect()
@@ -67,7 +67,7 @@ def add_person(userId, name):
         result = conn.execute(upd)
     result.close()
     conn.close()
-    print("Done person")
+    print("Done adding person")
 
 def add_group(groupId, botId):
     conn = engine.connect()
@@ -85,7 +85,7 @@ def add_group(groupId, botId):
         result = conn.execute(upd)
     result.close()
     conn.close()
-    print("Done group")
+    print("Done adding group")
 
 def find_dummy_bot(nname):
         conn = engine.connect()
@@ -101,7 +101,7 @@ def find_dummy_bot(nname):
             return row
         result.close()
         conn.close()
-        print("Done find message")
+        print("Done searching message")
 
 def show_all_dummy():
         conn = engine.connect()
@@ -117,7 +117,7 @@ def show_all_dummy():
             return row
         result.close()
         conn.close()
-        print("Done find dummies")
+        print("Done searching dummies")
 
 def get_user_id(user_name):
     conn = engine.connect()
@@ -129,8 +129,7 @@ def get_user_id(user_name):
         print("No person currently has that name")
         return None
     else:
-        print("Found person")
+        print("Found "+ user_name + "'s id")
         return row
     result.close()
     conn.close()
-    print("Found "+ user_name + "'s id")
