@@ -134,4 +134,4 @@ def get_user_id(user_name):
         return row
     result.close()
     conn.close()
-    print("Found "+ user_name "'s id")
+    print("Found "+ user_name + "'s id")
