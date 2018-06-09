@@ -124,7 +124,7 @@ def get_user_id(user_name):
     print("Select people")
     s = select([people.c.user_id]).where(people.c.current_name == user_name)
     result = conn.execute(s)
-    row = result.fetchall()
+    row = result.fetchone()
     if not row:
         print("No person currently has that name")
         return None
