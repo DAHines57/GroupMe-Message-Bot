@@ -8,6 +8,7 @@ import traceback
 import database
 from database import *
 from libs import post_text
+from help import help_text
 from os.path import join, dirname
 from dotenv import load_dotenv
 from flask import Flask
@@ -63,6 +64,12 @@ def parse_messages(bot_id):
         # Say hello to anyone that says "Hi"
         if re.search(r"\bhi\b", message['text'].lower()):
             post_text("Hi " + message['name'].split(" ")[0] + "!", bot_id)
+
+        # Help text
+        if message['text'].lower().startswith("/help"):
+            bot_name = request.args.get('name','')
+            msg = "Hi " + message['name'].split(" ")[0] + ", I'm " + bot_name + "! \n" + help_text
+            post_text(msg, bot_id)
 
         # Post gif from Giphy
         if message['text'].lower().startswith("/gif"):
