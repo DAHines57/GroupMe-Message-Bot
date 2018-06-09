@@ -16,4 +16,3 @@ def post_text_mention(user_text, bot_id, user_name):
     print("User id: " + mention_id)
     requests.post('https://api.groupme.com/v3/bots/post', params = {'attachments' : [{'loci':[[0,12]],'type':'mentions','user_ids':[mention_id]}]
     ,'bot_id' : bot_id, 'text' : user_text}).raise_for_status()
-s
