@@ -58,6 +58,10 @@ def parse_messages(bot_id):
                 msg = "No u."
             post_text(msg, dummy_bot)
 
+        #Test posting
+        if message['text'].startswith("/test") and message['sender_id'] == admin_sender_id:
+            post_text_mention("hiiiiiiiiiiiiii", bot_id, "Dylan Hines")
+
 
         """ Actions for all groups """
 

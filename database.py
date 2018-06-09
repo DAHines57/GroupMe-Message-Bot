@@ -119,3 +119,19 @@ def show_all_dummy():
         result.close()
         conn.close()
         print("Done find dummies")
+
+def get_user_id(user_name):
+    conn = engine.connect()
+    print("Select people")
+    s = select([people.c.user_id]).where(people.c.current_name == user_name)
+    result = conn.execute(s)
+    row = result.fetchall()
+    if not row:
+        print("No person currently has that name")
+        return None
+    else:
+        print("Found person")
+        return row
+    result.close()
+    conn.close()
+    print("Found "+ user_name "'s id")
