@@ -7,7 +7,7 @@ import requests
 import traceback
 import database
 from database import *
-from libs import post_text
+from libs import *
 from help import help_text
 from os.path import join, dirname
 from dotenv import load_dotenv
