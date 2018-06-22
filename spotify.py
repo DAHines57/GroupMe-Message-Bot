@@ -17,6 +17,7 @@ client_credentials_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 def post_rand_song(bot_id):
+    print("Finding spotify song")
     results = sp.user_playlist(username, playlist_id, 'tracks,next')
     tracks = results['tracks']
     all_tracks = tracks['items']

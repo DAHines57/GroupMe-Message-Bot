@@ -18,7 +18,7 @@ groups = Table('groups', meta, autoload=True, autoload_with=engine, schema='bot'
 
 def store_last_msg(groupId, msgId, msgText, name, senderId):
     conn = engine.connect()
-    print("Select msg")
+    print("Storing last msg")
     s = select([last_msg]).where(last_msg.c.group_id == groupId)
     result = conn.execute(s)
     row = result.fetchall()
@@ -38,6 +38,7 @@ def store_last_msg(groupId, msgId, msgText, name, senderId):
 
 def find_last_msg(groupId):
     conn = engine.connect()
+    print("Finding last msg")
     s = select([last_msg.c.msg_txt, last_msg.c.sender_name, last_msg.c.sender_id]).where(last_msg.c.group_id == groupId)
     result = conn.execute(s)
     row = result.fetchone()
@@ -49,11 +50,11 @@ def find_last_msg(groupId):
         return row
     result.close()
     conn.close()
-    print("Done finding message")
+    print("Done finding last message")
 
 def add_person(userId, name):
     conn = engine.connect()
-    print("Select person")
+    print("Adding person")
     s = select([people]).where(people.c.user_id == userId)
     result = conn.execute(s)
     row = result.fetchall()
@@ -71,7 +72,7 @@ def add_person(userId, name):
 
 def add_group(groupId, botId):
     conn = engine.connect()
-    print("Select group")
+    print("Adding group")
     s = select([groups]).where(groups.c.group_id == groupId)
     result = conn.execute(s)
     row = result.fetchall()
@@ -89,7 +90,7 @@ def add_group(groupId, botId):
 
 def find_dummy_bot(nname):
         conn = engine.connect()
-        print("Select group")
+        print("Finding dummy bot")
         s = select([groups.c.bot_id]).where(groups.c.nickname == nname)
         result = conn.execute(s)
         row = result.fetchall()
@@ -101,11 +102,11 @@ def find_dummy_bot(nname):
             return row
         result.close()
         conn.close()
-        print("Done searching message")
+        print("Done finding dummy bot")
 
 def show_all_dummy():
         conn = engine.connect()
-        print("Select group")
+        print("Showing all dummies")
         s = select([groups.c.nickname])
         result = conn.execute(s)
         row = result.fetchall()
@@ -117,11 +118,11 @@ def show_all_dummy():
             return row
         result.close()
         conn.close()
-        print("Done searching dummies")
+        print("Done showing dummies")
 
 def get_user_id(user_name):
     conn = engine.connect()
-    print("Select people")
+    print("Finding user id")
     s = select([people.c.user_id]).where(people.c.current_name == user_name)
     result = conn.execute(s)
     row = result.fetchone()
@@ -133,10 +134,11 @@ def get_user_id(user_name):
         return row
     result.close()
     conn.close()
+    print("Done finding user id")
 
 def check_silenced(botId):
     conn = engine.connect()
-    print("Select group")
+    print("Checking bot silence")
     s = select([groups.c.is_silenced]).where(groups.c.bot_id == botId)
     result = conn.execute(s)
     row = result.fetchone()
@@ -148,10 +150,11 @@ def check_silenced(botId):
         return row
     result.close()
     conn.close()
+    print("Done checking silence")
 
 def silence_awaken_bot(botId, status):
     conn = engine.connect()
-    print("Select group")
+    print("Silence/awakening bot")
     s = select([groups.c.is_silenced]).where(groups.c.bot_id == botId)
     result = conn.execute(s)
     row = result.fetchone()
@@ -159,7 +162,9 @@ def silence_awaken_bot(botId, status):
         print("No group with that bot")
         return None
     else:
+        print("Bot's group found")
         upd = groups.update().where(groups.c.bot_id == botId).values(is_silenced = status)
         result = conn.execute(upd)
     result.close()
     conn.close()
+    print("Done silence/awakening bot")

@@ -3,6 +3,7 @@ import time
 from database import get_user_id, check_silenced
 
 def post_text(user_text, bot_id):
+    print("Posting message")
     time.sleep(1)
     if len(user_text.strip()) == 0:
         raise ValueError("Can't post empty message")
@@ -12,6 +13,7 @@ def post_text(user_text, bot_id):
         print("BOT IS SILENCED")
 
 def post_text_mention(user_text, bot_id, mention_id):
+    print("Posting message with mention")
     time.sleep(1)
     if len(user_text.strip()) == 0:
         raise ValueError("Can't post empty message")
@@ -22,7 +24,7 @@ def post_text_mention(user_text, bot_id, mention_id):
       'bot_id': bot_id,
       'attachments': [{ 'loci': [[0,0]], 'type': "mentions", 'user_ids': [mention_id] }]
     };
-    
+
     if(not check_silenced(bot_id)[0]):
         requests.post('https://api.groupme.com/v3/bots/post', json=payload).raise_for_status()
     else:
