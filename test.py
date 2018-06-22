@@ -64,6 +64,11 @@ def parse_messages(bot_id):
         if message['text'].startswith("/test") and message['sender_id'] == admin_sender_id:
             post_text_mention("@Dylan Hines", bot_id, "Dylan Hines")
 
+        # Silence bot
+        if message['text'].startswith("/QUIET") and message['sender_id'] == admin_sender_id:
+            post_text(":((", bot_id)
+            silence_bot(bot_id)
+
 
         """ Actions for all groups """
 
@@ -132,7 +137,7 @@ def parse_messages(bot_id):
             num = int(message['text'][5:])
             rand = random.randint(1, num)
             post_text(u'\U0001F3B2: ' + str(rand), bot_id)
-        
+
 
         """ Store Last Message """
 

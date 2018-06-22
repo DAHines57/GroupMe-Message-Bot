@@ -133,3 +133,33 @@ def get_user_id(user_name):
         return row
     result.close()
     conn.close()
+
+def check_silenced(botId):
+    conn = engine.connect()
+    print("Select group")
+    s = select([groups.c.is_silenced]).where(groups.c.bot_id == botId)
+    result = conn.execute(s)
+    row = result.fetchone()
+    if not row:
+        print("No group with that bot")
+        return None
+    else:
+        print("Found bot's group")
+        return row
+    result.close()
+    conn.close()
+
+def silence_bot(botId):
+    conn = engine.connect()
+    print("Select group")
+    s = select([groups.c.is_silenced]).where(groups.c.bot_id == botId)
+    result = conn.execute(s)
+    row = result.fetchone()
+    if not row:
+        print("No group with that bot")
+        return None
+    else:
+        upd = groups.update().where(groups.c.bot_id == botId).values(is_silenced = True)
+        result = conn.execute(upd)
+    result.close()
+    conn.close()
