@@ -131,7 +131,7 @@ def parse_messages(bot_id):
         if message['text'].lower().startswith("/dice"):
             num = int(message['text'][5:])
             rand = random.randint(1, num)
-            post_text(u'\U0001F3B2: ' + rand, bot_id)
+            post_text(u'\U0001F3B2: ' + str(rand), bot_id)
 
         """ Store Last Message """
 
