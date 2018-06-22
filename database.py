@@ -149,7 +149,7 @@ def check_silenced(botId):
     result.close()
     conn.close()
 
-def silence_bot(botId):
+def silence_awaken_bot(botId, status):
     conn = engine.connect()
     print("Select group")
     s = select([groups.c.is_silenced]).where(groups.c.bot_id == botId)
@@ -159,7 +159,7 @@ def silence_bot(botId):
         print("No group with that bot")
         return None
     else:
-        upd = groups.update().where(groups.c.bot_id == botId).values(is_silenced = True)
+        upd = groups.update().where(groups.c.bot_id == botId).values(is_silenced = status)
         result = conn.execute(upd)
     result.close()
     conn.close()
