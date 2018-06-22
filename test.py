@@ -7,6 +7,8 @@ import requests
 import traceback
 import database
 from database import *
+import spotify
+from spotify import post_rand_song
 from libs import *
 from help import help_text
 from os.path import join, dirname
@@ -120,6 +122,10 @@ def parse_messages(bot_id):
             joke = requests.get("https://icanhazdadjoke.com", headers=headers)
             joke.raise_for_status()
             post_text(joke.content.decode("UTF-8"), bot_id)
+
+        # Random song
+        if message['text'].lower().startswith("/joke"):
+            post_rand_song()
 
         """ Store Last Message """
 
