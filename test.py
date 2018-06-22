@@ -30,6 +30,7 @@ def parse_messages(bot_id):
     try:
 
         message = request.get_json()
+        print(message)
 
         if message['sender_type'] != "user":
             return 'OK'
@@ -72,8 +73,6 @@ def parse_messages(bot_id):
         if message['text'].startswith("/AWAKEN") and message['sender_id'] == admin_sender_id:
             silence_awaken_bot(bot_id, False)
             post_text("thx bb :)", bot_id)
-
-
 
 
         """ Actions for all groups """
