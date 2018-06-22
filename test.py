@@ -127,6 +127,12 @@ def parse_messages(bot_id):
         if message['text'].lower().startswith("/song"):
             post_rand_song(bot_id)
 
+        # Dice
+        if message['text'].lower().startswith("/dice"):
+            num = int(message['text'][5:])
+            rand = randint(1, num)
+            post_text(u'\U0001F3B2: ' + num, bot_id)
+
         """ Store Last Message """
 
         if message['sender_type'] == "user":

@@ -25,5 +25,5 @@ def post_rand_song(bot_id):
         all_tracks += tracks['items']
 
     random_track = random.choice(all_tracks)
-    post_text(u'\U0001F3B5\U0001F4C5: ' + random_track['track']['name'] + ' - ' + random_track['track']['artists'][0]['name']
+    post_text(u'\U0001F3B5: ' + random_track['track']['name'] + ' - ' + random_track['track']['artists'][0]['name']
     + ' ' + random_track['track']['external_urls']['spotify'], bot_id)

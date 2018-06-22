@@ -4,6 +4,8 @@ help_text = """I'm a GroupMe bot that can do all sorts of things!
 /clap <text> - Clap after every word in <text>
 /durr - MoCk SoMeOnE's LaSt MeSsAgE
 /joke - I'll tell a terrible joke.
+/song - Post a random song from Dyl's playlist
+/dice <num> - Pick a number between 1 & <num>
 
 I also do stuff on my own...but that's a surprise.
 Made by Dylan Hines.
