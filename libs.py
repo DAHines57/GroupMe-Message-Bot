@@ -19,7 +19,7 @@ def post_text_mention(user_text, bot_id, user_name):
     payload = {
       'text': user_text,
       'bot_id': bot_id,
-      'attachments': [{ 'loci': [[0,12]], 'type': "mentions", 'user_ids': [mention_id] }]
+      'attachments': [{ 'loci': [[0,1]], 'type': "mentions", 'user_ids': [mention_id] }]
     };
 
     requests.post('https://api.groupme.com/v3/bots/post', json=payload).raise_for_status()
