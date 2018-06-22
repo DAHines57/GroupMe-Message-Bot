@@ -70,8 +70,9 @@ def parse_messages(bot_id):
             silence_awaken_bot(bot_id, True)
 
         if message['text'].startswith("/AWAKEN") and message['sender_id'] == admin_sender_id:
-            post_text("thx bb :)", bot_id)
             silence_awaken_bot(bot_id, False)
+            post_text("thx bb :)", bot_id)
+
 
 
 
