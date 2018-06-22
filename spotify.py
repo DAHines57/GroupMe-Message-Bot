@@ -16,7 +16,7 @@ playlist_id = os.environ.get("SPOTIPY_PLAYLIST_ID")
 client_credentials_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-def post_rand_song():
+def post_rand_song(bot_id):
     results = sp.user_playlist(username, playlist_id, 'tracks,next')
     tracks = results['tracks']
     all_tracks = tracks['items']
@@ -25,6 +25,5 @@ def post_rand_song():
         all_tracks += tracks['items']
 
     random_track = random.choice(all_tracks)
-    post_text("test", sys.argv[1])
-    """post_text(u'\U0001F3B5\U0001F4C5: ' + random_track['track']['name'] + ' - ' + random_track['track']['artists'][0]['name']
-    + ' ' + random_track['track']['external_urls']['spotify'], sys.argv[1])"""
+    post_text(u'\U0001F3B5\U0001F4C5: ' + random_track['track']['name'] + ' - ' + random_track['track']['artists'][0]['name']
+    + ' ' + random_track['track']['external_urls']['spotify'], bot_id)

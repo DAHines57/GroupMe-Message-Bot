@@ -125,7 +125,7 @@ def parse_messages(bot_id):
 
         # Random song
         if message['text'].lower().startswith("/song"):
-            post_rand_song()
+            post_rand_song(bot_id)
 
         """ Store Last Message """
 
