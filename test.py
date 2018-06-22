@@ -30,8 +30,7 @@ def parse_messages(bot_id):
     try:
 
         message = request.get_json()
-        print(message)
-
+        
         if message['sender_type'] != "user":
             return 'OK'
 
