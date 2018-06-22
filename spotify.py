@@ -9,20 +9,15 @@ import spotipy
 import os
 from spotipy.oauth2 import SpotifyClientCredentials
 
-'''
-sadness_texts = [line.strip() for line in open('list of saddness.txt')]
-central = timezone('US/Central')
-now = datetime.now(tz=pytz.utc)
-'''
-
 username = os.environ.get("USERNAME")
 client_id = os.environ.get("SPOTIPY_CLIENT_ID")
 client_secret = os.environ.get("SPOTIPY_CLIENT_SECRET")
+playlist_id = os.environ.get("SPOTIPY_PLAYLIST_ID")
 client_credentials_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 def post_rand_song():
-    results = sp.user_playlist(username, sys.argv[2], 'tracks,next')
+    results = sp.user_playlist(username, playlist_id, 'tracks,next')
     tracks = results['tracks']
     all_tracks = tracks['items']
     while tracks['next']:
