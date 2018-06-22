@@ -132,6 +132,7 @@ def parse_messages(bot_id):
             num = int(message['text'][5:])
             rand = random.randint(1, num)
             post_text(u'\U0001F3B2: ' + str(rand), bot_id)
+        
 
         """ Store Last Message """
 
