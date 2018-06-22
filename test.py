@@ -124,7 +124,7 @@ def parse_messages(bot_id):
             post_text(joke.content.decode("UTF-8"), bot_id)
 
         # Random song
-        if message['text'].lower().startswith("/joke"):
+        if message['text'].lower().startswith("/song"):
             post_rand_song()
 
         """ Store Last Message """
