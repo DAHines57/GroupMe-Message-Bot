@@ -30,7 +30,7 @@ def parse_messages(bot_id):
     try:
 
         message = request.get_json()
-        
+
         if message['sender_type'] != "user":
             return 'OK'
 
@@ -62,7 +62,7 @@ def parse_messages(bot_id):
 
         #Test posting
         if message['text'].startswith("/test") and message['sender_id'] == admin_sender_id:
-            post_text_mention("Dylan Hines", bot_id, "Dylan Hines")
+            post_text_mention("Dylan Hines", bot_id, message['sender_id'])
 
         # Silence bot
         if message['text'].startswith("/QUIET") and message['sender_id'] == admin_sender_id:
@@ -84,7 +84,7 @@ def parse_messages(bot_id):
         if message['text'].lower().startswith("/help"):
             bot_name = request.args.get('name','')
             msg = "Hi " + message['name'].split(" ")[0] + ", I'm " + bot_name + "! \n" + help_text
-            post_text(msg, bot_id)
+            post_text_mention(msg, bot_id, message['sender_id'])
 
         # Post gif from Giphy
         if message['text'].lower().startswith("/gif"):
@@ -95,7 +95,7 @@ def parse_messages(bot_id):
                 for i in range(int(num)):
                     post_text(gif.translate(gif_search).media_url, bot_id)
             else:
-                post_text("Can you not.", bot_id)
+                post_text_mention("Can you not.", bot_id, message['sender_id'])
 
         # Clap a bunch
         if message['text'].lower().startswith("/clap"):
@@ -121,9 +121,9 @@ def parse_messages(bot_id):
                 durr_url = "https://memegen.link/spongebob/hurr_durr_i'm_" + sender + "/and_i_just_want_to_say.jpg?watermark=none&height=600&width=600"
                 if lastSenderId != admin_sender_id or message['sender_id'] == admin_sender_id:
                     post_text(durr_url, bot_id)
-                    post_text(msg, bot_id)
+                    post_text_mention(msg, bot_id, lastSenderId)
                 else:
-                    post_text("I'm sorry " + message['name'].split(" ")[0] + ", I'm afraid I can't do that.", bot_id)
+                    post_text_mention("I'm sorry " + message['name'].split(" ")[0] + ", I'm afraid I can't do that.", bot_id, messsge['sender_id'])
 
         # Jokes
         if message['text'].lower().startswith("/joke"):
