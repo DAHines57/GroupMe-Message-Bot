@@ -24,7 +24,10 @@ load_dotenv(dotenv_path)
 gif = giphypop.Giphy()
 admin_sender_id = os.environ.get("ADMIN_SENDER_ID")
 
-last_message = ''
+@app.route('/callback/get', methods=['GET'])
+def get_access_token(access_token):
+    print(request.args.get('access_token'))
+
 @app.route('/callback/<bot_id>', methods=['POST'])
 def parse_messages(bot_id):
     try:
