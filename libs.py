@@ -24,7 +24,7 @@ def post_text_mention(user_text, bot_id, mention_ids):
 
     payload = {
       'text': user_text,
-      'bot_id': '91b6231aef61428e91e64f1cb4',
+      'bot_id': bot_id,
       'attachments': [{ 'loci': [[0,0]], 'type': "mentions", 'user_ids': [mention_ids] }]
     };
 
