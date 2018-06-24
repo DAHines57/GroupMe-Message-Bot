@@ -23,6 +23,7 @@ load_dotenv(dotenv_path)
 
 gif = giphypop.Giphy()
 admin_sender_id = os.environ.get("ADMIN_SENDER_ID")
+access_token = os.environ.get("GROUPME_ACCESS_TOKEN")
 
 @app.route('/callback/get', methods=['GET'])
 def get_access_token():
@@ -69,7 +70,9 @@ def parse_messages(bot_id):
 
         #Test posting
         if message['text'].startswith("/test") and message['sender_id'] == admin_sender_id:
-            post_text_mention("Dylan Hines", bot_id, message['sender_id'])
+            message_info = get_group_info(message['group_id'])
+            print(message_info)
+            post_text("done", bot_id)
 
         # Silence bot
         if message['text'].startswith("/QUIET") and message['sender_id'] == admin_sender_id:
