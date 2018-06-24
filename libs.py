@@ -22,7 +22,7 @@ def post_text_mention(user_text, bot_id, mention_ids):
         mention_ids = [mention_ids]
     print("User id: " + str(mention_ids))
     lociA = []
-    for x in range(len(mention_ids))
+    for x in range(len(mention_ids)):
         lociA.append([0,0])
 
     payload = {
