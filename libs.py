@@ -1,6 +1,7 @@
 import requests
 import time
 import os
+import json
 from database import get_user_id, check_silenced
 
 def post_text(user_text, bot_id):
@@ -25,7 +26,7 @@ def post_text_mention(user_text, bot_id, mention_ids):
     payload = {
       'text': user_text,
       'bot_id': bot_id,
-      'attachments': [{ 'loci': [[0,0]], 'type': "mentions", 'user_ids': mention_ids }]
+      'attachments': [{ 'loci': [[0,0]], 'type': "mentions", 'user_ids': json.dumps(mention_ids) }]
     };
 
     if(not check_silenced(bot_id)[0]):
