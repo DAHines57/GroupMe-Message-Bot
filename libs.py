@@ -22,11 +22,12 @@ def post_text_mention(user_text, bot_id, mention_ids):
     if not isinstance(mention_ids, list):
         mention_ids = [mention_ids]
     print("User id: " + str(mention_ids))
+    json_mentions = json.dumps(mention_ids)
 
     payload = {
       'text': user_text,
       'bot_id': bot_id,
-      'attachments': [{ 'loci': [[0,0]], 'type': "mentions", 'user_ids': json.dumps(mention_ids) }]
+      'attachments': [{ 'loci': [[0,0]], 'type': "mentions", 'user_ids': json_mentions }]
     };
 
     if(not check_silenced(bot_id)[0]):
