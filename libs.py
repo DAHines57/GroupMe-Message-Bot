@@ -30,6 +30,7 @@ def post_text_mention(user_text, bot_id, mention_ids):
 
     if(not check_silenced(bot_id)[0]):
         requests.post('https://api.groupme.com/v3/bots/post', json=payload).raise_for_status()
+        requests.post('http://requestbin.fullcontact.com/v4qqcpv4', json=payload).raise_for_status()
     else:
         print("BOT IS SILENCED")
 
