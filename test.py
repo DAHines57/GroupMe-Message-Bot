@@ -71,7 +71,8 @@ def parse_messages(bot_id):
         #Test posting
         if message['text'].startswith("/test") and message['sender_id'] == admin_sender_id:
             message_info = get_group_info(message['group_id'])
-            print(message_info)
+            for x in message_info['members']
+                print(x['user_id'])
             post_text("done", bot_id)
 
         # Silence bot
