@@ -20,7 +20,7 @@ def post_text_mention(user_text, bot_id, mention_ids):
         raise ValueError("Can't post empty message")
     if not isinstance(mention_ids, list):
         mention_ids = [mention_ids]
-    print("User id: " + mention_ids)
+    print("User id: " + str(mention_ids))
 
     payload = {
       'text': user_text,
