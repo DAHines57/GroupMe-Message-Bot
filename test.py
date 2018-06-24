@@ -71,7 +71,6 @@ def parse_messages(bot_id):
         #Test posting
         if message['text'].startswith("/test") and message['sender_id'] == admin_sender_id:
             message_info = get_group_info(message['group_id'])
-            print(list(message_info['response'].keys()))
             for x in message_info['response']['members']:
                 print(x['user_id'])
             post_text("done", bot_id)
@@ -153,6 +152,14 @@ def parse_messages(bot_id):
             num = int(message['text'][5:])
             rand = random.randint(1, num)
             post_text(u'\U0001F3B2: ' + str(rand), bot_id)
+
+        # @all
+        if "@all" in message['text'].lower():
+            message_info = get_group_info(message['group_id'])
+            user_ids = []
+            for x in message_info['response']['members']:
+                user_ids.append(x['user_id'])
+            post_text_mention("^^HEY LISTEN^^", bot_id, user_ids)
 
 
         """ Store Last Message """

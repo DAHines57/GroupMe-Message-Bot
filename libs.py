@@ -13,17 +13,19 @@ def post_text(user_text, bot_id):
     else:
         print("BOT IS SILENCED")
 
-def post_text_mention(user_text, bot_id, mention_id):
+def post_text_mention(user_text, bot_id, mention_ids):
     print("Posting message with mention")
     time.sleep(1)
     if len(user_text.strip()) == 0:
         raise ValueError("Can't post empty message")
-    print("User id: " + mention_id)
+    if not isinstance(mention_ids, list):
+        mention_ids = [mention_ids]
+    print("User id: " + mention_ids)
 
     payload = {
       'text': user_text,
       'bot_id': bot_id,
-      'attachments': [{ 'loci': [[0,0]], 'type': "mentions", 'user_ids': [mention_id] }]
+      'attachments': [{ 'loci': [[0,0]], 'type': "mentions", 'user_ids': mention_ids }]
     };
 
     if(not check_silenced(bot_id)[0]):
