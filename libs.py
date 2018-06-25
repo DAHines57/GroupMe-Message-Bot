@@ -32,7 +32,7 @@ def post_text_mention(user_text, bot_id, mention_ids):
     payload = {
       'text': user_text,
       'bot_id': bot_id,
-      'attachments': [{ 'loci': [lociA], 'type': "mentions", 'user_ids': [mentions] }]
+      'attachments': [{ 'loci': lociA, 'type': "mentions", 'user_ids': mentions }]
     };
 
     if(not check_silenced(bot_id)[0]):
