@@ -46,7 +46,7 @@ def remove_user(group_id, membership_id, bot_id):
     print("Removing a user")
     access_token = os.environ.get("GROUPME_ACCESS_TOKEN")
     if(not check_silenced(bot_id)[0]):
-        requests.post('https://api.groupme.com/v3/bots/groups/' + group_id + '/members/' + membership_id + '/remove' + '?token=' + access_token).raise_for_status()
+        requests.post('https://api.groupme.com/v3/groups/' + group_id + '/members/' + membership_id + '/remove' + '?token=' + access_token).raise_for_status()
         print("User removed.")
     else:
         print("BOT IS SILENCED")
