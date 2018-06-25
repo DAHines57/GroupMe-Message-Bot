@@ -8,7 +8,6 @@ import traceback
 import database
 import roast
 import spotify
-import compliments, part1, part2, part3
 from roast import *
 from database import *
 from spotify import post_rand_song
@@ -195,7 +194,7 @@ def parse_messages(bot_id):
                     if recipient.lower() in x['nickname'].lower():
                         user_id = x['user_id']
                         nickname = x['nickname'].split(" ")[0]
-                        txt = nickname + ", " + generate_compliment(part1, part2, part3)
+                        txt = nickname + ", " + generate_compliment()
                 if user_id == -1:
                     post_text("Couldn't find anyone by that name.", bot_id)
                 else:
