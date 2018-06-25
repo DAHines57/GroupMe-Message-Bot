@@ -9,4 +9,5 @@ def generateInsult():
     column2 = random.choice(roast['column2'])
     column3 = random.choice(roast['column3'])
     txt = "\n" + "Thou", column1, column2, column3
+    print(txt)
     return txt
