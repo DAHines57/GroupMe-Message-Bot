@@ -14,3 +14,4 @@ icalendar
 spotipy
 psycopg2-binary
 sqlalchemy
+PyYAML
