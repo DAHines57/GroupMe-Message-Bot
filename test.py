@@ -8,9 +8,11 @@ import traceback
 import database
 import roast
 import spotify
+import compliments, part1, part2, part3
 from roast import *
 from database import *
 from spotify import post_rand_song
+from compliments import generate_compliment
 from libs import *
 from help import help_text
 from os.path import join, dirname
@@ -166,23 +168,38 @@ def parse_messages(bot_id):
 
         # Shakesperian roast
         if message['text'].lower().startswith("/roast"):
-            txt = generateInsult()
+            txt = generate_insult()
             if len(message['text']) > 6:
                 victim = message['text'][7:]
-                member_id = -1
                 user_id = -1
-                print(victim)
+                print("Roasting: " + victim)
                 message_info = get_group_info(message['group_id'])
                 for x in message_info['response']['members']:
                     if victim.lower() in x['nickname'].lower():
-                        member_id = x['id']
                         user_id = x['user_id']
                 if user_id == -1:
-                    post_text(txt, bot_id)
+                    post_text("Couldn't find anyone by that name.", bot_id)
                 else:
                     post_text_mention(txt, bot_id, user_id)
             else:
-                post_text(txt, bot_id)
+                post_text_mention("I need someone to roast dingus.", bot_id, message['sender_id'])
+
+        # Compliments
+        if message['text'].lower().startswith('/flatter'):
+            if len(message['text']) > 8:
+                recipient = message['text'][9:]
+                user_id = -1
+                print("Compliments: " + recipient)
+                message_info = get_group_info(message['group_id'])
+                for x in message_info['response']['members']:
+                    if recipient.lower() in x['nickname'].lower():
+                        user_id = x['user_id']
+                        nickname = x['nickname'].split(" ")[0]
+                        txt = nickname + ", " + generate_compliment(part1, part2, part3)
+                if user_id == -1:
+                    post_text("Couldn't find anyone by that name.", bot_id)
+                else:
+                    post_text_mention(txt, bot_id, user_id)
 
         # Terminate a user
         if message['text'].lower().startswith("/terminate"):

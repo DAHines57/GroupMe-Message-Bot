@@ -4,7 +4,7 @@ import yaml
 
 roast = yaml.load(open(os.path.dirname(__file__) + '/s_roast.yml'))
 
-def generateInsult():
+def generate_insult():
     column1 = random.choice(roast['column1'])
     column2 = random.choice(roast['column2'])
     column3 = random.choice(roast['column3'])

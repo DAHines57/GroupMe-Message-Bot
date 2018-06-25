@@ -7,7 +7,8 @@ help_text = """I'm a GroupMe bot that can do all sorts of things!
 /joke - I'll tell a terrible joke.
 /song - Post a random song from Dyl's playlist
 /dice <num> - Pick a number between 1 & <num>
-/roast <name>* - Thou art an idiot.
+/roast <name> - Thou art an idiot.
+/flatter <name> - Brighten someone's day
 
 The * means that argument is optional
 
