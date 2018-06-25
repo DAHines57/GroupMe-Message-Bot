@@ -11,11 +11,12 @@ engine = create_engine(database_url)
 Base = declarative_base(engine)
 meta=MetaData(bind=engine)
 
-
+# All my db table connections
 last_msg = Table('last_msg', meta, autoload=True, autoload_with=engine, schema='bot')
 people = Table('people', meta, autoload=True, autoload_with=engine, schema='bot')
 groups = Table('groups', meta, autoload=True, autoload_with=engine, schema='bot')
 
+# Store the most recent msg of every group in last_msg
 def store_last_msg(groupId, msgId, msgText, name, senderId):
     conn = engine.connect()
     print("Storing last msg")
@@ -36,6 +37,7 @@ def store_last_msg(groupId, msgId, msgText, name, senderId):
     conn.close()
     print("Done storing msg")
 
+# Retrieve the last message from a group
 def find_last_msg(groupId):
     conn = engine.connect()
     print("Finding last msg")
@@ -52,6 +54,7 @@ def find_last_msg(groupId):
     conn.close()
     print("Done finding last message")
 
+# Add a person to the people table
 def add_person(userId, name):
     conn = engine.connect()
     print("Adding person")
@@ -70,6 +73,7 @@ def add_person(userId, name):
     conn.close()
     print("Done adding person")
 
+# Add a group to the groups table
 def add_group(groupId, botId):
     conn = engine.connect()
     print("Adding group")
@@ -88,6 +92,7 @@ def add_group(groupId, botId):
     conn.close()
     print("Done adding group")
 
+# Find the bot id of the group to speak into
 def find_dummy_bot(nname):
         conn = engine.connect()
         print("Finding dummy bot")
@@ -104,6 +109,7 @@ def find_dummy_bot(nname):
         conn.close()
         print("Done finding dummy bot")
 
+# Show all other availble bots for ventriloquism
 def show_all_dummy():
         conn = engine.connect()
         print("Showing all dummies")
@@ -120,6 +126,7 @@ def show_all_dummy():
         conn.close()
         print("Done showing dummies")
 
+# Get a user's id based on their name from the people table
 def get_user_id(user_name):
     conn = engine.connect()
     print("Finding user id")
@@ -136,6 +143,7 @@ def get_user_id(user_name):
     conn.close()
     print("Done finding user id")
 
+# Check if a bot is currently silenced
 def check_silenced(botId):
     conn = engine.connect()
     print("Checking bot silence")
@@ -152,6 +160,7 @@ def check_silenced(botId):
     conn.close()
     print("Done checking silence")
 
+# Silence or awaken a particular bot
 def silence_awaken_bot(botId, status):
     conn = engine.connect()
     print("Silence/awakening bot")

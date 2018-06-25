@@ -37,14 +37,16 @@ def get_access_token():
 def parse_messages(bot_id):
     try:
 
+        # Grab message info
         message = request.get_json()
 
+        # Ignore non user messages (aka bots)
         if message['sender_type'] != "user":
             return 'OK'
 
         """ Admin Actions """
 
-        #Ventriloquism
+        # Ventriloquism
         if message['text'].startswith("/dummy"):
             if message['sender_id'] == admin_sender_id:
                 print("Start dummy")
@@ -68,22 +70,20 @@ def parse_messages(bot_id):
                 msg = "No u."
             post_text(msg, dummy_bot)
 
-        #Test posting
+        # Silence bot
+        if message['text'].startswith("/QUIET") and message['sender_id'] == admin_sender_id:
+            post_text(":((", bot_id)
+            silence_awaken_bot(bot_id, True)
+        if message['text'].startswith("/AWAKEN") and message['sender_id'] == admin_sender_id:
+            silence_awaken_bot(bot_id, False)
+            post_text("thx bb :)", bot_id)
+
+        # Testing command
         if message['text'].startswith("/test") and message['sender_id'] == admin_sender_id:
             message_info = get_group_info(message['group_id'])
             for x in message_info['response']['members']:
                 print(x['user_id'])
             post_text("done", bot_id)
-
-        # Silence bot
-        if message['text'].startswith("/QUIET") and message['sender_id'] == admin_sender_id:
-            post_text(":((", bot_id)
-            silence_awaken_bot(bot_id, True)
-
-        if message['text'].startswith("/AWAKEN") and message['sender_id'] == admin_sender_id:
-            silence_awaken_bot(bot_id, False)
-            post_text("thx bb :)", bot_id)
-
 
         """ Actions for all groups """
 
@@ -159,11 +159,13 @@ def parse_messages(bot_id):
             user_ids = []
             for x in message_info['response']['members']:
                 user_ids.append(x['user_id'])
-            post_text_mention("^^HEY LISTEN^^", bot_id, user_ids)
+            txt = "^^HEY LISTEN, " + message['name'].split(" ")[0] + " SAID SOMETHING IMPORTANT"
+            post_text_mention(txt, bot_id, user_ids)
 
 
-        """ Store Last Message """
+        """ Remembering Stuff """
 
+        # Save msg and update group and person
         if message['sender_type'] == "user":
             store_last_msg(message['group_id'], message['id'], message['text'], message['name'], message['sender_id'])
             add_person(message['sender_id'], message['name'])

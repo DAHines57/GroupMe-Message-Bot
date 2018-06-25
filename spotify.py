@@ -16,6 +16,7 @@ playlist_id = os.environ.get("SPOTIPY_PLAYLIST_ID")
 client_credentials_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
+# Post a random song from my main playlist
 def post_rand_song(bot_id):
     print("Finding spotify song")
     results = sp.user_playlist(username, playlist_id, 'tracks,next')
