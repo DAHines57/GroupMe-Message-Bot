@@ -41,6 +41,14 @@ def post_text_mention(user_text, bot_id, mention_ids):
     else:
         print("BOT IS SILENCED")
 
+# Remove a user from a group
+def remove_user(group_id, membership_id, bot_id):
+    print("Removing a user")
+    if(not check_silenced(bot_id)[0]):
+        requests.post('https://api.groupme.com/v3/bots/groups/' + group_id + '/members/' + membership_id + '/remove')
+    else:
+        print("BOT IS SILENCED")
+
 # Snag the group JSON data
 def get_group_info(group_id):
     access_token = os.environ.get("GROUPME_ACCESS_TOKEN")

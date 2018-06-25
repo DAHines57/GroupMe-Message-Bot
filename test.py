@@ -169,6 +169,26 @@ def parse_messages(bot_id):
             txt = generateInsult()
             post_text(txt, bot_id)
 
+        # Terminate a user
+        if message['text'].lower().startswith("/terminate"):
+            victim = message['text'][11:]
+            memberId = -1
+            userId = -1
+            print(victim)
+            message_info = get_group_info(message['group_id'])
+            for x in message_info['response']['members']:
+                if x['nickname'] == victim:
+                    memberId = x['id']
+                    userId = x['user_id']
+            if userId == -1:
+                post_text("No one to terminate by that name", bot_id)
+            elif userId == admin_sender_id:
+                post_text("LEAVE MY MAKER ALONE", bot_id)
+            else:
+                post_text_mention("SAYONARA SUCKER.", bot_id, userId)
+                remove_user(message['group_id'], memberId, bot_id)
+
+
         """ Remembering Stuff """
 
         # Save msg and update group and person
