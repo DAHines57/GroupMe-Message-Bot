@@ -28,12 +28,12 @@ def post_text_mention(user_text, bot_id, mention_ids):
       'bot_id': bot_id,
       'attachments': [{ 'loci': [], 'type': "mentions", 'user_ids': [] }]
     };
-    lociA = []
     for x in range(len(mention_ids)):
         payload['attachments'][0]['loci'].append([0,0])
 
     payload['attachments'][0]['loci'].append(mention_ids)
 
+    print(payload)
 
     if(not check_silenced(bot_id)[0]):
         requests.post('https://api.groupme.com/v3/bots/post', json=payload).raise_for_status()
