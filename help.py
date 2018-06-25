@@ -9,6 +9,8 @@ help_text = """I'm a GroupMe bot that can do all sorts of things!
 /dice <num> - Pick a number between 1 & <num>
 /roast <name>* - Thou art an idiot.
 
+The * means that argument is optional
+
 I also do stuff on my own...but that's a surprise.
 Made by Dylan Hines.
 """
