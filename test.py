@@ -134,7 +134,7 @@ def parse_messages(bot_id):
                     post_text(durr_url, bot_id)
                     post_text_mention(msg, bot_id, lastSenderId)
                 else:
-                    post_text_mention("I'm sorry " + message['name'].split(" ")[0] + ", I'm afraid I can't do that.", bot_id, message['sender_id'])
+                    post_text_mention("I'm sorry " + message['name'].split(" ")[0].upper() + ", I'm afraid I can't do that.", bot_id, message['sender_id'])
 
         # Jokes
         if message['text'].lower().startswith("/joke"):
