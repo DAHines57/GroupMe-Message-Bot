@@ -6,8 +6,10 @@ import subprocess
 import requests
 import traceback
 import database
-from database import *
+import roast
 import spotify
+from roast import *
+from database import *
 from spotify import post_rand_song
 from libs import *
 from help import help_text
@@ -162,6 +164,10 @@ def parse_messages(bot_id):
             txt = "^^HEY LISTEN, " + message['name'].split(" ")[0].upper() + " SAID SOMETHING IMPORTANT^^"
             post_text_mention(txt, bot_id, user_ids)
 
+        # Shakesperian roast
+        if message['text'].lower().startswith("/roast"):
+            txt = generateInsult()
+            post_text(txt, bot_id)
 
         """ Remembering Stuff """
 
