@@ -31,7 +31,7 @@ def post_text_mention(user_text, bot_id, mention_ids):
     for x in range(len(mention_ids)):
         payload['attachments'][0]['loci'].append([0,0])
 
-    payload['attachments'][0]['loci'].append(mention_ids)
+    payload['attachments'][0]['user_ids'].append(mention_ids)
 
     print(payload)
 
