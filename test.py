@@ -159,7 +159,7 @@ def parse_messages(bot_id):
             user_ids = []
             for x in message_info['response']['members']:
                 user_ids.append(x['user_id'])
-            txt = "^^HEY LISTEN, " + message['name'].split(" ")[0].upper() + " SAID SOMETHING IMPORTANT"
+            txt = "^^HEY LISTEN, " + message['name'].split(" ")[0].upper() + " SAID SOMETHING IMPORTANT^^"
             post_text_mention(txt, bot_id, user_ids)
 
 
