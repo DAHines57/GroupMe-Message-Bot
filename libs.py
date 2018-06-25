@@ -22,7 +22,6 @@ def post_text_mention(user_text, bot_id, mention_ids):
     if not isinstance(mention_ids, list):
         mention_ids = [mention_ids]
     print("User id: " + str(mention_ids))
-    mentions = json.dumps(mention_ids)
     payload = {
       'text': user_text,
       'bot_id': bot_id,
@@ -37,7 +36,6 @@ def post_text_mention(user_text, bot_id, mention_ids):
 
     if(not check_silenced(bot_id)[0]):
         requests.post('https://api.groupme.com/v3/bots/post', json=payload).raise_for_status()
-        requests.post('http://requestbin.fullcontact.com/1neu8ut1', json=payload).raise_for_status()
     else:
         print("BOT IS SILENCED")
 
