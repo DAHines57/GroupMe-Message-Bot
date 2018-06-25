@@ -27,6 +27,8 @@ def post_text_mention(user_text, bot_id, mention_ids):
     for x in range(len(mention_ids)):
         loci.append([0,0])
     lociA = json.dumps(loci)
+    print(lociA)
+    print(mentions)
     payload = {
       'text': user_text,
       'bot_id': bot_id,
