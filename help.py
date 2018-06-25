@@ -7,6 +7,7 @@ help_text = """I'm a GroupMe bot that can do all sorts of things!
 /joke - I'll tell a terrible joke.
 /song - Post a random song from Dyl's playlist
 /dice <num> - Pick a number between 1 & <num>
+/roast - Thou art an idiot.
 
 I also do stuff on my own...but that's a surprise.
 Made by Dylan Hines.

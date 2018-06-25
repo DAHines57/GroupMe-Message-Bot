@@ -11,5 +11,5 @@ def generateInsult():
     adj = "a"
     if column1[0] in ['a','e','i','o','u']:
         adj = "an"
-    txt = "Thou art " + adj + " " + column1 + " " + column2 + " " + column3
+    txt = "Thou art " + adj + " " + column1 + " " + column2 + " " + column3 + "."
     return txt
