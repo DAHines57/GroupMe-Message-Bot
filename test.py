@@ -199,6 +199,8 @@ def parse_messages(bot_id):
                     post_text("Couldn't find anyone by that name.", bot_id)
                 else:
                     post_text_mention(txt, bot_id, user_id)
+            else:
+                post_text_mention("I need someone to compliment dingus.", bot_id, message['sender_id'])
 
         # Terminate a user
         if message['text'].lower().startswith("/terminate"):

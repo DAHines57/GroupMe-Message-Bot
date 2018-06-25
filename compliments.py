@@ -70,7 +70,7 @@ def generate_compliment():
     list_of_sentences = []
     for word in range(n):
             try:
-                    list_of_sentences = start[word] + ' ' + middle[word] + ' ' + end[word]
+                    list_of_sentences = part1[word] + ' ' + part2[word] + ' ' + part3[word]
                     list_of_sentences = list_of_sentences.capitalize() + '. '
             except IndexError:
                     break
