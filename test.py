@@ -167,7 +167,22 @@ def parse_messages(bot_id):
         # Shakesperian roast
         if message['text'].lower().startswith("/roast"):
             txt = generateInsult()
-            post_text(txt, bot_id)
+            if len(message['text']) > 6:
+                victim = message['text'][7:]
+                memberId = -1
+                userId = -1
+                print(victim)
+                message_info = get_group_info(message['group_id'])
+                for x in message_info['response']['members']:
+                    if victim.lower() in x['nickname'].lower():
+                        memberId = x['id']
+                        userId = x['user_id']
+                if user_id == -1:
+                    post_text(txt, bot_id)
+                else:
+                    post_text_mention(txt, bot_id, userId)
+            else:
+                post_text(txt, bot_id)
 
         # Terminate a user
         if message['text'].lower().startswith("/terminate"):
