@@ -177,7 +177,7 @@ def parse_messages(bot_id):
             print(victim)
             message_info = get_group_info(message['group_id'])
             for x in message_info['response']['members']:
-                if x['nickname'] == victim:
+                if victim.lower() in x['nickname'].lower():
                     memberId = x['id']
                     userId = x['user_id']
             if userId == -1:
