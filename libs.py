@@ -30,9 +30,9 @@ def post_text_mention(user_text, bot_id, mention_ids):
     };
     lociA = []
     for x in range(len(mention_ids)):
-        payload.attachments[0]['loci'].append([0,0])
+        payload['attachments'][0]['loci'].append([0,0])
 
-    payload.attachments[0]['loci'].append(mention_ids)
+    payload['attachments'][0]['loci'].append(mention_ids)
 
 
     if(not check_silenced(bot_id)[0]):
