@@ -27,7 +27,7 @@ def post_text_mention(user_text, bot_id, mention_ids):
     payload = {
       'text': user_text,
       'bot_id': bot_id,
-      'attachments': [{ 'loci': [[0,0]], 'type': "mentions", 'user_ids': [mentions] }]
+      'attachments': [{ 'loci': [[0,0]], 'type': "mentions", 'user_ids': ["6567358","19791433"] }]
     };
 
     if(not check_silenced(bot_id)[0]):
