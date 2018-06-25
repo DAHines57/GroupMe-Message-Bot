@@ -23,11 +23,14 @@ def post_text_mention(user_text, bot_id, mention_ids):
         mention_ids = [mention_ids]
     print("User id: " + str(mention_ids))
     mentions = json.dumps(mention_ids)
-
+    loci = []
+    for x in range(len(mention_ids)):
+        loci.append([0,0])
+    lociA = json.dumps(loci)
     payload = {
       'text': user_text,
       'bot_id': bot_id,
-      'attachments': [{ 'loci': [[0,0],[0,0]], 'type': "mentions", 'user_ids': ["6567358","19791433"] }]
+      'attachments': [{ 'loci': [lociA], 'type': "mentions", 'user_ids': [mentions] }]
     };
 
     if(not check_silenced(bot_id)[0]):
