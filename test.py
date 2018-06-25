@@ -169,39 +169,39 @@ def parse_messages(bot_id):
             txt = generateInsult()
             if len(message['text']) > 6:
                 victim = message['text'][7:]
-                memberId = -1
-                userId = -1
+                member_id = -1
+                user_id = -1
                 print(victim)
                 message_info = get_group_info(message['group_id'])
                 for x in message_info['response']['members']:
                     if victim.lower() in x['nickname'].lower():
-                        memberId = x['id']
-                        userId = x['user_id']
+                        member_id = x['id']
+                        user_id = x['user_id']
                 if user_id == -1:
                     post_text(txt, bot_id)
                 else:
-                    post_text_mention(txt, bot_id, userId)
+                    post_text_mention(txt, bot_id, user_id)
             else:
                 post_text(txt, bot_id)
 
         # Terminate a user
         if message['text'].lower().startswith("/terminate"):
             victim = message['text'][11:]
-            memberId = -1
-            userId = -1
+            member_id = -1
+            user_id = -1
             print(victim)
             message_info = get_group_info(message['group_id'])
             for x in message_info['response']['members']:
                 if victim.lower() in x['nickname'].lower():
-                    memberId = x['id']
-                    userId = x['user_id']
-            if userId == -1:
+                    member_id = x['id']
+                    user_id = x['user_id']
+            if user_id == -1:
                 post_text("No one to terminate by that name", bot_id)
-            elif userId == admin_sender_id:
+            elif user_id == admin_sender_id:
                 post_text("LEAVE MY MAKER ALONE", bot_id)
             else:
-                post_text_mention("SAYONARA SUCKER.", bot_id, userId)
-                remove_user(message['group_id'], memberId, bot_id)
+                post_text_mention("SAYONARA SUCKER.", bot_id, user_id)
+                remove_user(message['group_id'], member_id, bot_id)
 
 
         """ Remembering Stuff """
