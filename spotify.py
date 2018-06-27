@@ -7,6 +7,7 @@ import pytz
 from libs import post_text
 import spotipy
 import os
+import requests
 from spotipy.oauth2 import SpotifyClientCredentials
 
 username = os.environ.get("USERNAME")
@@ -29,3 +30,9 @@ def post_rand_song(bot_id):
     random_track = random.choice(all_tracks)
     post_text(u'\U0001F3B5: ' + random_track['track']['name'] + ' - ' + random_track['track']['artists'][0]['name']
     + ' ' + random_track['track']['external_urls']['spotify'], bot_id)
+
+def get_top_song(bot_id):
+    print("Finding Dyl's top song")
+    response = requests.get("https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1&offset=0").raise_for_status()
+    info = response.json()
+    return info['items']['name']

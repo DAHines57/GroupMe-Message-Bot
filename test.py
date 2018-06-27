@@ -10,7 +10,7 @@ import roast
 import spotify
 from roast import *
 from database import *
-from spotify import post_rand_song
+from spotify import *
 from compliments import generate_compliment
 from libs import *
 from help import help_text
@@ -83,10 +83,8 @@ def parse_messages(bot_id):
 
         # Testing command
         if message['text'].startswith("/test") and message['sender_id'] == admin_sender_id:
-            message_info = get_group_info(message['group_id'])
-            for x in message_info['response']['members']:
-                print(x['user_id'])
-            post_text("done", bot_id)
+            post_text(get_top_song(bot_id), bot_id)
+
 
         """ Actions for all groups """
 
