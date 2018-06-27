@@ -8,6 +8,7 @@ from libs import post_text
 import spotipy
 import os
 import requests
+import spotipy.util as util
 from spotipy.oauth2 import SpotifyClientCredentials
 
 username = os.environ.get("USERNAME")
@@ -33,6 +34,16 @@ def post_rand_song(bot_id):
 
 def get_top_song(bot_id):
     print("Finding Dyl's top song")
-    response = requests.get("https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1&offset=0").raise_for_status()
-    info = response.json()
-    return info['items']['name']
+    scope = 'user-top-read'
+    username = os.environ.get("USERNAME")
+    token = util.prompt_for_user_token(username, scope)
+    if token:
+        sp = spotipy.Spotify(auth=token)
+        sp.trace = False
+        results = sp.current_user_top_tracks(time_range='short_term', limit=1)
+        for i, item in enumerate(results['items']):
+            print( i, item['name'], '//', item['artists'][0]['name'])
+        print()
+
+    else:
+        print("Can't get token for", username)
