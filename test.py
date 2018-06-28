@@ -216,7 +216,7 @@ def parse_messages(bot_id):
             elif user_id == admin_sender_id:
                 post_text("LEAVE MY MAKER ALONE", bot_id)
             else:
-                post_text_mention("SAYONARA SUCKER.", bot_id, user_id)
+                post_text_mention("BEGONE, THOT.", bot_id, user_id)
                 remove_user(message['group_id'], member_id, bot_id)
 
 
