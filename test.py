@@ -167,7 +167,7 @@ def parse_messages(bot_id):
         if message['text'].lower().startswith("/roast"):
             txt = generate_insult()
             if len(message['text']) > 6:
-                victim = message['text'][7:]
+                victim = message['text'][7:].strip()
                 user_id = -1
                 print("Roasting: " + victim)
                 message_info = get_group_info(message['group_id'])
@@ -184,7 +184,7 @@ def parse_messages(bot_id):
         # Compliments
         if message['text'].lower().startswith('/flatter'):
             if len(message['text']) > 8:
-                recipient = message['text'][9:]
+                recipient = message['text'][9:].strip()
                 user_id = -1
                 print("Compliments: " + recipient)
                 message_info = get_group_info(message['group_id'])
@@ -202,7 +202,7 @@ def parse_messages(bot_id):
 
         # Terminate a user
         if message['text'].lower().startswith("/terminate"):
-            victim = message['text'][11:]
+            victim = message['text'][11:].strip()
             member_id = -1
             user_id = -1
             print(victim)
