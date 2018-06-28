@@ -239,6 +239,14 @@ def parse_messages(bot_id):
                 result = "Tails."
             post_text(result, bot_id)
 
+        if message['text'].lower().startswith("/urban"):
+            term = message['text'][7:].strip()
+            if len(term) <= 0:
+                def = "Don't have anything to define."
+            else:
+                def = urban_define(term)
+            post_text(def, bot_id)
+
         """ Remembering Stuff """
 
         # Save msg and update group and person
