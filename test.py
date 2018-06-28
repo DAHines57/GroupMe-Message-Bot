@@ -27,6 +27,8 @@ load_dotenv(dotenv_path)
 gif = giphypop.Giphy()
 admin_sender_id = os.environ.get("ADMIN_SENDER_ID")
 access_token = os.environ.get("GROUPME_ACCESS_TOKEN")
+ball_responses = ["Not so sure", "42", "Most likely", "Absolutely not", "Outlook is good", "I see good things happening", "Never",
+            "Negative", "Could be", "Unclear, ask again", "Yes", "No", "Possible, but not probable"]
 
 @app.route('/callback/get', methods=['GET'])
 def get_access_token():
@@ -219,6 +221,24 @@ def parse_messages(bot_id):
                 post_text_mention("BEGONE, THOT.", bot_id, user_id)
                 remove_user(message['group_id'], member_id, bot_id)
 
+        # 8Ball
+        if message['text'].lower().startswith("/8ball"):
+            question = message['text'][7:].strip()
+            if len(question) <= 0:
+                answer = "Can't answer a blank question."
+            else:
+                answer = random.choice(ball_responses))
+
+            post_text_mention(answer, bot_id, message['sender_id'])
+
+        # Coin flip
+        if message['text'].lower().startswith("/flip"):
+            coin = random.randint(1,2)
+            if coin == 1:
+                result = "Heads."
+            else:
+                result = "Tails."
+            post_text(result, bot_id)
 
         """ Remembering Stuff """
 

@@ -31,19 +31,3 @@ def post_rand_song(bot_id):
     random_track = random.choice(all_tracks)
     post_text(u'\U0001F3B5: ' + random_track['track']['name'] + ' - ' + random_track['track']['artists'][0]['name']
     + ' ' + random_track['track']['external_urls']['spotify'], bot_id)
-
-def get_top_song(bot_id):
-    print("Finding Dyl's top song")
-    scope = 'user-top-read'
-    username = os.environ.get("USERNAME")
-    token = util.prompt_for_user_token(username, scope)
-    if token:
-        sp = spotipy.Spotify(auth=token)
-        sp.trace = False
-        results = sp.current_user_top_tracks(time_range='short_term', limit=1)
-        for i, item in enumerate(results['items']):
-            print( i, item['name'], '//', item['artists'][0]['name'])
-        print()
-
-    else:
-        print("Can't get token for", username)
