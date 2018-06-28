@@ -227,8 +227,7 @@ def parse_messages(bot_id):
             if len(question) <= 0:
                 answer = "Can't answer a blank question."
             else:
-                answer = random.choice(ball_responses))
-
+                answer = random.choice(ball_responses)
             post_text_mention(answer, bot_id, message['sender_id'])
 
         # Coin flip
