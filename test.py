@@ -8,6 +8,8 @@ import traceback
 import database
 import roast
 import spotify
+import urban
+from urban import *
 from roast import *
 from database import *
 from spotify import *
