@@ -9,6 +9,8 @@ import database
 import roast
 import spotify
 import urban
+import oxford
+from oxford import *
 from urban import *
 from roast import *
 from database import *
@@ -149,7 +151,7 @@ def parse_messages(bot_id):
             post_text(joke.content.decode("UTF-8"), bot_id)
 
         # Random song
-        if message['text'].lower().startswith("/song"):
+        if message['text'].lower().startswith("/randsong"):
             post_rand_song(bot_id)
 
         # Dice
@@ -241,6 +243,16 @@ def parse_messages(bot_id):
                 result = "Tails."
             post_text(result, bot_id)
 
+        # Oxford Dictionary
+        if message['text'].lower().startswith("/define"):
+            word = message['text'][8:].strip()
+            if len(word) <= 0:
+                define = "Don't have anything to define."
+            else:
+                define = define_word(word)
+            post_text(define, bot_id)
+
+        # Urban Dictionary
         if message['text'].lower().startswith("/urban"):
             term = message['text'][7:].strip()
             if len(term) <= 0:

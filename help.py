@@ -5,10 +5,12 @@ help_text = """I'm a GroupMe bot that can do all sorts of things!
 /clap <text> - Clap after every word in <text>
 /durr - MoCk SoMeOnE's LaSt MeSsAgE
 /joke - I'll tell a terrible joke.
-/song - Post a random song from Dyl's playlist
+/randsong - Post a random song from Dyl's playlist
 /dice <num> - Pick a number between 1 & <num>
 /roast <name> - Thou art an idiot.
 /flatter <name> - Brighten someone's day
+/define <word> - Define a word
+/urban <term> - Look up a term on UrbanDict
 /8ball <question> - Yes/No?
 /flip - Flip a coin
 
