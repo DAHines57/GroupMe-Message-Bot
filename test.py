@@ -31,8 +31,11 @@ load_dotenv(dotenv_path)
 gif = giphypop.Giphy()
 admin_sender_id = os.environ.get("ADMIN_SENDER_ID")
 access_token = os.environ.get("GROUPME_ACCESS_TOKEN")
-ball_responses = ["Not so sure", "42", "Most likely", "Absolutely not", "Outlook is good", "I see good things happening", "Never",
-            "Negative", "Could be", "Unclear, ask again", "Yes", "No", "Possible, but not probable"]
+ball_responses=["It is certain.", "It is decidedly so.", "Without a doubt.", "Yes - definitely.", "You may rely on it.",
+ "As I see it, yes.", "Most likely.", "Outlook is good.", "Yes.", "Signs point to yes.", "Reply hazy, try again.",
+ "Ask again later.", "Better not tell you now.", "Cannot predict now.", "Concentrate and ask again.",
+ "Don't count on it.", "My reply is no.", "My sources say no.", "No.", "Absolutely the frik not.", "Outlook not so good.",
+ "Very doubtful."]
 
 @app.route('/callback/get', methods=['GET'])
 def get_access_token():
