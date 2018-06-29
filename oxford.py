@@ -11,10 +11,8 @@ def define_word(word):
     word_id = word
 
     url = 'https://od-api.oxforddictionaries.com:443/api/v1/entries/' + language + '/' + word_id.lower()
-    print(app_id)
-    print(app_key)
     r = requests.get(url, headers = {'app_id': app_id, 'app_key': app_key}).json()
 
-
-    result = word.capitalize() + ": " + r['results']['lexicalEntries']['senses']['definitions'][0]
+    definition = r['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
+    result = word.capitalize() + ": " + definition
     return result
