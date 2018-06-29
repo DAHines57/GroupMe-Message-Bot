@@ -2,10 +2,9 @@ import requests
 import json
 import os
 
-app_id = os.environ.get("OXFORD_ID")
-app_key = os.environ.get("OXFORD_API_KEY")
-
 def define_word(word):
+    app_id = os.environ.get("OXFORD_ID")
+    app_key = os.environ.get("OXFORD_API_KEY")
     language = 'en'
     word_id = word
 
