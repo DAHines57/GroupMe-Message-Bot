@@ -267,7 +267,7 @@ def parse_messages(bot_id):
 
         # Watch ur profanity
         if any(word in message['text'].lower() for word in profanity):
-            post_text_mention("https://media.giphy.com/media/4vYksifnc7Sw/giphy.gif", bot_id, message['sender_id'])
+            post_text_mention("HEY https://media.giphy.com/media/4vYksifnc7Sw/giphy.gif", bot_id, message['sender_id'])
 
         """ Remembering Stuff """
 
