@@ -36,6 +36,7 @@ ball_responses=["It is certain.", "It is decidedly so.", "Without a doubt.", "Ye
  "Ask again later.", "Better not tell you now.", "Cannot predict now.", "Concentrate and ask again.",
  "Don't count on it.", "My reply is no.", "My sources say no.", "No.", "Absolutely the frik not.", "Outlook not so good.",
  "Very doubtful."]
+profanity=["damn", "shit", "fuck", "bitch", "dammit"]
 
 @app.route('/callback/get', methods=['GET'])
 def get_access_token():
@@ -263,6 +264,10 @@ def parse_messages(bot_id):
             else:
                 define = urban_define(term)
             post_text(define, bot_id)
+
+        # Watch ur profanity
+        if any(word in message['text'].lower() for word in profanity):
+            post_text_mention("https://media.giphy.com/media/4vYksifnc7Sw/giphy.gif", bot_id, message['sender_id'])
 
         """ Remembering Stuff """
 
