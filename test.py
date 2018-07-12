@@ -265,9 +265,9 @@ def parse_messages(bot_id):
                 define = urban_define(term)
             post_text(define, bot_id)
 
-        # Watch ur profanity
-        if any(word in message['text'].lower() for word in profanity):
-            post_text("https://media.giphy.com/media/4vYksifnc7Sw/giphy.gif", bot_id)
+        # Watch ur profanity - EHH
+        """if any(word in message['text'].lower() for word in profanity):
+            post_text("https://media.giphy.com/media/4vYksifnc7Sw/giphy.gif", bot_id)"""
 
         """ Remembering Stuff """
 
