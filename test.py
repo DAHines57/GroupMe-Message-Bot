@@ -165,7 +165,7 @@ def parse_messages(bot_id):
             post_text(u'\U0001F3B2: ' + str(rand), bot_id)
 
         # @all
-        if "@all" in message['text'].lower():
+        if re.search(r"\b@all\b", message['text'].lower()):
             message_info = get_group_info(message['group_id'])
             user_ids = []
             for x in message_info['response']['members']:
