@@ -57,6 +57,14 @@ def parse_messages(bot_id):
         if message['sender_type'] != "user":
             return 'OK'
 
+        """ Remembering Stuff """
+
+        # Save msg and update group and person
+        if message['sender_type'] == "user":
+            store_last_msg(message['group_id'], message['id'], message['text'], message['name'], message['sender_id'])
+            add_person(message['sender_id'], message['name'])
+            add_group(message['group_id'], bot_id)
+
         """ Admin Actions """
 
         # Ventriloquism
@@ -269,13 +277,7 @@ def parse_messages(bot_id):
         """if any(word in message['text'].lower() for word in profanity):
             post_text("https://media.giphy.com/media/4vYksifnc7Sw/giphy.gif", bot_id)"""
 
-        """ Remembering Stuff """
 
-        # Save msg and update group and person
-        if message['sender_type'] == "user":
-            store_last_msg(message['group_id'], message['id'], message['text'], message['name'], message['sender_id'])
-            add_person(message['sender_id'], message['name'])
-            add_group(message['group_id'], bot_id)
 
 
         return 'OK'
