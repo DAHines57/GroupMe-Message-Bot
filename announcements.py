@@ -17,7 +17,6 @@ for evt in cal.subcomponents:
     time_left = start - now
     if timedelta(minutes=0) < time_left < timedelta(minutes=10):
         raw_text = evt.decoded('SUMMARY')
-        post_text(message, bot_id)
         search = re.search(r"([^ ]+)\s(.+)", raw_text)
         (nname, message) = search.groups('1')
         bot_id = find_bot_nname(nname)[0][0]
