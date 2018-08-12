@@ -21,12 +21,14 @@ for evt in cal.subcomponents:
         raw_text = str(evt.decoded('SUMMARY'))
         search = re.search(r"([^ ]+)\s(.+)", raw_text)
         (nname, message) = search.groups('1')
+        nname = nname[2:]
+        message = message[:-1]
         print(nname)
         print(message)
         bot_id = find_bot_nname(nname)
         if not bot_id:
             bot_id = sys.argv[1]
-            post_text("I was supposed to post " + message + " to " + nname, bot_id)
+            post_text("I was supposed to post '" + message + "' to " + nname, bot_id)
         else:
             bot_id = bot_id[0][0]
             post_text(message, bot_id)
