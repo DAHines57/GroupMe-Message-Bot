@@ -92,22 +92,22 @@ def add_group(groupId, botId):
     conn.close()
     print("Done adding group")
 
-# Find the bot id of the group to speak into
-def find_dummy_bot(nname):
+# Find the bot id based on nickname
+def find_bot_nname(nname):
         conn = engine.connect()
-        print("Finding dummy bot")
+        print("Finding bot id from nickname")
         s = select([groups.c.bot_id]).where(groups.c.nickname == nname)
         result = conn.execute(s)
         row = result.fetchall()
         if not row:
-            print("No dummy here")
+            print("No bot here")
             return None
         else:
-            print("Found dummy")
+            print("Found bot")
             return row
         result.close()
         conn.close()
-        print("Done finding dummy bot")
+        print("Done finding bot id")
 
 # Show all other availble bots for ventriloquism
 def show_all_dummy():

@@ -57,7 +57,11 @@ def parse_messages(bot_id):
         if message['sender_type'] != "user":
             return 'OK'
 
-
+        """ Remembering Stuff """
+        # Update group and person
+        if message['sender_type'] == "user":
+            add_person(message['sender_id'], message['name'])
+            add_group(message['group_id'], bot_id)
 
         """ Admin Actions """
 
@@ -74,7 +78,7 @@ def parse_messages(bot_id):
                         msg += x[0] + "\n"
                     dummy_bot = bot_id
                 else:
-                    dummy_bot = find_dummy_bot(nickname)[0][0]
+                    dummy_bot = find_bot_nname(nickname)[0][0]
                     if not dummy_bot:
                         dummy_bot = bot_id
                         msg = "No group with nickname '" + nickname + "'"
@@ -86,10 +90,10 @@ def parse_messages(bot_id):
             post_text(msg, dummy_bot)
 
         # Silence bot
-        if message['text'].startswith("/QUIET") and message['sender_id'] == admin_sender_id:
+        if message['text'].startswith("/botoff") and message['sender_id'] == admin_sender_id:
             post_text(":((", bot_id)
             silence_awaken_bot(bot_id, True)
-        if message['text'].startswith("/AWAKEN") and message['sender_id'] == admin_sender_id:
+        if message['text'].startswith("/boton") and message['sender_id'] == admin_sender_id:
             silence_awaken_bot(bot_id, False)
             post_text("thx bb :)", bot_id)
 
@@ -271,7 +275,7 @@ def parse_messages(bot_id):
         """if any(word in message['text'].lower() for word in profanity):
             post_text("https://media.giphy.com/media/4vYksifnc7Sw/giphy.gif", bot_id)"""
 
-        """ Remembering Stuff """
+        """ Store last message """
         # Save msg and update group and person
         if message['sender_type'] == "user":
             store_last_msg(message['group_id'], message['id'], message['text'], message['name'], message['sender_id'])

@@ -16,4 +16,13 @@ for evt in cal.subcomponents:
     now = datetime.now(tz=pytz.utc)
     time_left = start - now
     if timedelta(minutes=0) < time_left < timedelta(minutes=10):
-        post_text(evt.decoded('SUMMARY'), sys.argv[1])
+        raw_text = evt.decoded('SUMMARY')
+        post_text(message, bot_id)
+        search = re.search(r"([^ ]+)\s(.+)", raw_text)
+        (nname, message) = search.groups('1')
+        bot_id = find_bot_nname(nname)[0][0]
+        if not bot_id:
+            bot_id = sys.argv[1]
+            post_text("I was supposed to post " + message + " to " + nname, bot_id)
+        else:
+            post_text(message, bot_id)
