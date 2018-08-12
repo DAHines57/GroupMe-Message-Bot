@@ -5,6 +5,7 @@ import pytz
 from datetime import datetime, timedelta
 from libs import post_text
 from icalendar import Calendar
+import re
 
 r = requests.get(sys.argv[2])
 icsData = r.text
