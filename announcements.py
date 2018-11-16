@@ -21,7 +21,6 @@ for evt in cal.walk('vevent'):
         raw_text = str(evt.get('SUMMARY'))
         search = re.search(r"([^ ]+)\s(.+)", raw_text)
         (nname, message) = search.groups('1')
-        nname = nname[2:]
         message = message[:-1]
         print(raw_text)
         print(nname)
