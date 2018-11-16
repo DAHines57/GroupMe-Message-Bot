@@ -23,6 +23,7 @@ for evt in cal.walk('vevent'):
         (nname, message) = search.groups('1')
         nname = nname[2:]
         message = message[:-1]
+        print(raw_text)
         print(nname)
         print(message)
         bot_id = find_bot_nname(nname)
