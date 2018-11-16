@@ -15,11 +15,11 @@ cal = Calendar.from_ical(icsData)
 
 for evt in cal.walk('vevent'):
     print(evt)
-    start = evt.decoded('DTSTART')
+    start = evt.get('DTSTART').date()
     now = datetime.now(tz=pytz.utc)
     time_left = start - now
     if timedelta(minutes=0) < time_left < timedelta(minutes=10):
-        raw_text = str(evt.decoded('SUMMARY'))
+        raw_text = str(evt.get('SUMMARY'))
         search = re.search(r"([^ ]+)\s(.+)", raw_text)
         (nname, message) = search.groups('1')
         nname = nname[2:]
