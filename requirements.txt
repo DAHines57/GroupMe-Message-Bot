@@ -4,7 +4,7 @@ itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
 python-dotenv==0.6.4
-requests==2.14.2
+requests==2.20.0
 Werkzeug==0.12.1
 gevent
 gunicorn
