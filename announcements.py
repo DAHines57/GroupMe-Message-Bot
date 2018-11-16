@@ -15,7 +15,7 @@ cal = Calendar.from_ical(icsData)
 
 for evt in cal.walk('vevent'):
     print(evt)
-    start = evt.get('DTSTART').date()
+    start = evt.decoded('DTSTART')
     now = datetime.now(tz=pytz.utc)
     time_left = start - now
     if timedelta(minutes=0) < time_left < timedelta(minutes=10):
