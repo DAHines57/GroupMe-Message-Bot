@@ -14,6 +14,7 @@ icsData = r.text
 cal = Calendar.from_ical(icsData)
 
 for evt in cal.subcomponents:
+    print(evt);
     start = evt.decoded('DTSTART')
     now = datetime.now(tz=pytz.utc)
     time_left = start - now
